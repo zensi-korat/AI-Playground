@@ -41,6 +41,11 @@ The button component has been audited against Figma Node `1:1183`.
 -   **Variants**: Supports `secondary`, `outline`, `ghost`, `link`, etc.
 -   **Sizes**: `default` (40px), `sm`, `lg`, `icon`.
 
+### Subscription Page (`src/pages/SubscriptionPage.tsx`)
+A pixel-perfect implementation of the Figma subscription design with light theme.
+
+![Subscription Page](./.github/subscription-page.png)
+
 ## Project Structure
 
 -   `src/all-variables.json`: Raw Figma variables.

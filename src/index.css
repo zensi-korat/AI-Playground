@@ -6,6 +6,28 @@
   --colors-base-black: #000000;
   --colors-base-transparent: #ffffff00;
   --colors-base-white: #ffffff;
+  
+  /* Figma Design System Colors */
+  --fg-brand-primary: #379dff;
+  --fg-primary: #ffffff;
+  --fg-quarterary: #94969c;
+  --fg-tertiary: #94969c;
+  --fg-senary: #61646c;
+  --text-placeholder: #85888e;
+  --text-placeholder-subtle: #333741;
+  --text-primary: #f5f5f6;
+  --text-tertiary: #94969c;
+  --text-quarterary: #94969c;
+  --text-quinary: #85888e;
+  --bg-primary: #000000;
+  --border-primary: #ffffff59;
+  --border-secondary: #333741;
+  --border-tertiary: #1f242f;
+  --border-brand: #58adff;
+  --button-primary-bg: #0584ff;
+  --button-primary-fg: #ffffff;
+  --button-primary-border: #0584ff;
+  --button-tertiary-fg: #d0d5dd;
   --colors-blue100: #d1e9ff;
   --colors-blue200: #b2ddff;
   --colors-blue25: #f5faff;
