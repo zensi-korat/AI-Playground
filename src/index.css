@@ -6,7 +6,7 @@
   --colors-base-black: #000000;
   --colors-base-transparent: #ffffff00;
   --colors-base-white: #ffffff;
-  
+
   /* Figma Design System Colors */
   --fg-brand-primary: #379dff;
   --fg-primary: #ffffff;
@@ -531,13 +531,16 @@
 }
 
 @theme inline {
-  /* Mappings could be automated if we knew the tokens, */
-  /* but for now we rely on the generic variables generated above. */
+  /* Minimal color token mappings to satisfy Tailwind utilities */
+  --color-border: var(--border-primary);
+  --color-background: var(--bg-primary);
+  --color-foreground: var(--text-primary);
+  --color-ring: var(--border-brand);
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
