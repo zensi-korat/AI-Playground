@@ -1,5 +1,5 @@
-import { useCallback, CSSProperties } from "react";
-import { formatUser } from "../utils/formatUser";
+import { useCallback, type CSSProperties } from "react";
+import { formatUser } from "../utils/formatUser.ts";
 
 interface UserCardProps {
   name: string;
