@@ -2,7 +2,7 @@
 
 **Phase**: Phase 1 (Design & Contracts)  
 **Date**: 2026-01-05  
-**Feature**: 001-subscription-page  
+**Feature**: 001-subscription-page
 
 ## Component Architecture
 
@@ -52,11 +52,13 @@ SubscriptionPage (page component)
 **Props**: None (self-contained page component)
 
 **State**:
+
 ```typescript
-const [billingCycle, setBillingCycle] = useState<'month' | 'year'>('month')
+const [billingCycle, setBillingCycle] = useState<"month" | "year">("month");
 ```
 
 **Responsibilities**:
+
 - Render main card layout
 - Manage billing cycle state
 - Coordinate feature list rendering
@@ -64,8 +66,9 @@ const [billingCycle, setBillingCycle] = useState<'month' | 'year'>('month')
 - Display CTA and footer
 
 **Exports**:
+
 ```typescript
-export default function SubscriptionPage(): JSX.Element
+export default function SubscriptionPage(): JSX.Element;
 ```
 
 ---
@@ -75,22 +78,25 @@ export default function SubscriptionPage(): JSX.Element
 **File**: `src/components/FeatureItem.tsx`
 
 **Props**:
+
 ```typescript
 interface FeatureItemProps {
-  text: string
+  text: string;
 }
 ```
 
 **State**: None (presentational component)
 
 **Responsibilities**:
+
 - Render single feature list item
 - Display checkmark icon (Lucide Check)
 - Apply consistent spacing and typography
 
 **Exports**:
+
 ```typescript
-export function FeatureItem({ text }: FeatureItemProps): JSX.Element
+export function FeatureItem({ text }: FeatureItemProps): JSX.Element;
 ```
 
 ---
@@ -105,23 +111,28 @@ const FEATURES = [
   "Unlimited Audio Messages",
   "600 Character Limit On Enhanced Memory",
   "Enhanced Memory Context",
-  "Remove Ads"
-]
+  "Remove Ads",
+];
 
 // Pricing tiers (derived from state)
-type BillingCycle = 'month' | 'year'
+type BillingCycle = "month" | "year";
 
 interface PricingTier {
-  cycle: BillingCycle
-  label: string
-  price: number
-  breakdown?: string
+  cycle: BillingCycle;
+  label: string;
+  price: number;
+  breakdown?: string;
 }
 
 const PRICING: Record<BillingCycle, PricingTier> = {
-  month: { cycle: 'month', label: 'Per Month', price: 9.99 },
-  year: { cycle: 'year', label: 'Per Year', price: 99, breakdown: 'USD 8.25 / Month' }
-}
+  month: { cycle: "month", label: "Per Month", price: 9.99 },
+  year: {
+    cycle: "year",
+    label: "Per Year",
+    price: 99,
+    breakdown: "USD 8.25 / Month",
+  },
+};
 ```
 
 ---
@@ -131,22 +142,22 @@ const PRICING: Record<BillingCycle, PricingTier> = {
 ```typescript
 // src/types/subscription.ts (optional, if extracted to separate file)
 
-export type BillingCycle = 'month' | 'year'
+export type BillingCycle = "month" | "year";
 
 export interface SubscriptionFeature {
-  text: string
+  text: string;
 }
 
 export interface SubscriptionTier {
-  cycle: BillingCycle
-  label: string
-  price: number
-  breakdown?: string
+  cycle: BillingCycle;
+  label: string;
+  price: number;
+  breakdown?: string;
 }
 
 export interface SubscriptionPageState {
-  billingCycle: BillingCycle
-  features: SubscriptionFeature[]
+  billingCycle: BillingCycle;
+  features: SubscriptionFeature[];
 }
 ```
 
@@ -158,8 +169,8 @@ export interface SubscriptionPageState {
 
 ```css
 @theme {
-  --color-brand-primary: #0066FF;
-  --color-brand-primary-hover: #0052CC;
+  --color-brand-primary: #0066ff;
+  --color-brand-primary-hover: #0052cc;
   --color-border-active: #000000;
   --color-border-inactive: #d3d3d3;
   --color-text-primary: #000000;
@@ -251,13 +262,13 @@ SubscriptionPage (billingCycle state)
 ```typescript
 /**
  * Subscription pricing page component
- * 
+ *
  * Displays subscription features and pricing options with interactive toggle.
  * Uses local state for pricing cycle (monthly/yearly) toggle.
- * 
+ *
  * Props: None
  * State: billingCycle ('month' | 'year'), default 'month'
- * 
+ *
  * Renders:
  * - Card with character image at top
  * - 6 subscription features with checkmarks
@@ -265,11 +276,11 @@ SubscriptionPage (billingCycle state)
  * - Security badge ("Secured with App Store, Cancel anytime")
  * - CTA button ("Visual Studio Code →")
  * - Footer with Privacy Policy, User Agreement, EULA links
- * 
+ *
  * Responsive: 375px (mobile), 768px (tablet), 1440px+ (desktop)
  * Accessibility: Semantic HTML, keyboard focusable, ARIA labels where needed
  */
-export default function SubscriptionPage(): JSX.Element
+export default function SubscriptionPage(): JSX.Element;
 ```
 
 ### FeatureItem
@@ -277,16 +288,16 @@ export default function SubscriptionPage(): JSX.Element
 ```typescript
 /**
  * Feature list item subcomponent
- * 
+ *
  * Renders a single feature with checkmark icon
- * 
+ *
  * Props:
  * - text: string - Feature description text
- * 
+ *
  * Example:
  * <FeatureItem text="Unlimited Text Messages" />
  */
-export function FeatureItem({ text }: FeatureItemProps): JSX.Element
+export function FeatureItem({ text }: FeatureItemProps): JSX.Element;
 ```
 
 ---
@@ -299,7 +310,10 @@ When implementing goal tracking via localStorage:
 
 ```typescript
 // Future addition to SubscriptionPage
-const [selectedGoal, setSelectedGoal] = useLocalStorage('subscription-goal', null)
+const [selectedGoal, setSelectedGoal] = useLocalStorage(
+  "subscription-goal",
+  null
+);
 
 const handleCTAClick = () => {
   // Track goal selection
@@ -307,9 +321,9 @@ const handleCTAClick = () => {
     plan: billingCycle,
     timestamp: new Date().toISOString(),
     // ... other tracking data
-  })
+  });
   // Navigate to checkout or payment
-}
+};
 ```
 
 ### Phase 4: Payment Processing
@@ -319,29 +333,29 @@ When integrating payment:
 ```typescript
 // Future addition
 interface PaymentConfig {
-  productId: string
-  amount: number
-  currency: 'USD'
+  productId: string;
+  amount: number;
+  currency: "USD";
 }
 
 const handleCheckout = async (config: PaymentConfig) => {
   // Call payment API
   // Handle success/error states
-}
+};
 ```
 
 ---
 
 ## Quality Metrics
 
-| Metric | Target | Approach |
-|--------|--------|----------|
-| **Bundle Size Impact** | < 10KB | Only UI components + Tailwind classes |
-| **Render Performance** | < 2ms initial render | Minimal state, no complex computations |
-| **Toggle Response** | < 100ms | Simple setState, no async operations |
-| **Accessibility Score** | 90+ | Semantic HTML, ARIA labels, keyboard navigation |
-| **Code Maintainability** | High | TypeScript, clear naming, focused components |
-| **Test Coverage** | N/A | Manual verification (per constitution) |
+| Metric                   | Target               | Approach                                        |
+| ------------------------ | -------------------- | ----------------------------------------------- |
+| **Bundle Size Impact**   | < 10KB               | Only UI components + Tailwind classes           |
+| **Render Performance**   | < 2ms initial render | Minimal state, no complex computations          |
+| **Toggle Response**      | < 100ms              | Simple setState, no async operations            |
+| **Accessibility Score**  | 90+                  | Semantic HTML, ARIA labels, keyboard navigation |
+| **Code Maintainability** | High                 | TypeScript, clear naming, focused components    |
+| **Test Coverage**        | N/A                  | Manual verification (per constitution)          |
 
 ---
 
@@ -352,6 +366,6 @@ const handleCheckout = async (config: PaymentConfig) => {
 ✅ Type definitions provide type safety  
 ✅ Styling strategy is consistent with project  
 ✅ No complex state management needed  
-✅ Ready for implementation phase  
+✅ Ready for implementation phase
 
 **Next**: Generate quickstart.md and contracts/ in Phase 1

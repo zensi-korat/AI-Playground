@@ -3,7 +3,7 @@
 **Component**: `src/pages/SubscriptionPage.tsx`  
 **Type**: Page Component (React Functional Component)  
 **Status**: To be implemented  
-**Phase**: Phase 1  
+**Phase**: Phase 1
 
 ## Overview
 
@@ -12,7 +12,7 @@ The SubscriptionPage is a self-contained page component that displays a subscrip
 ## Component Signature
 
 ```typescript
-export default function SubscriptionPage(): JSX.Element
+export default function SubscriptionPage(): JSX.Element;
 ```
 
 **Props**: None (self-contained; no props accepted)
@@ -32,7 +32,7 @@ export default function SubscriptionPage(): JSX.Element
 ## Internal State
 
 ```typescript
-const [billingCycle, setBillingCycle] = useState<'month' | 'year'>('month')
+const [billingCycle, setBillingCycle] = useState<"month" | "year">("month");
 ```
 
 - **Type**: `'month' | 'year'`
@@ -61,16 +61,16 @@ const [billingCycle, setBillingCycle] = useState<'month' | 'year'>('month')
 
 ### Key DOM Elements
 
-| Section | Element | Classes | Content |
-|---------|---------|---------|---------|
-| Container | `<div>` | `flex min-h-screen w-full bg-white text-black overflow-auto` | Full-screen container |
-| Main | `<main>` | `flex-1 flex flex-col items-center py-12 px-4` | Centered content area |
-| Card wrapper | `<div>` | `w-full max-w-md` | Responsive max-width |
-| Card | `<Card>` | - | shadcn Card component |
-| Image | `<img>` | `w-full h-full object-cover` | Character image |
-| Features | `<ul>` | `space-y-3` | Feature list container |
-| Pricing grid | `<div>` | `grid grid-cols-2 gap-3` | 2-column button grid |
-| Footer | `<CardFooter>` | `flex-col gap-4 px-6 pb-6` | Footer section |
+| Section      | Element        | Classes                                                      | Content                |
+| ------------ | -------------- | ------------------------------------------------------------ | ---------------------- |
+| Container    | `<div>`        | `flex min-h-screen w-full bg-white text-black overflow-auto` | Full-screen container  |
+| Main         | `<main>`       | `flex-1 flex flex-col items-center py-12 px-4`               | Centered content area  |
+| Card wrapper | `<div>`        | `w-full max-w-md`                                            | Responsive max-width   |
+| Card         | `<Card>`       | -                                                            | shadcn Card component  |
+| Image        | `<img>`        | `w-full h-full object-cover`                                 | Character image        |
+| Features     | `<ul>`         | `space-y-3`                                                  | Feature list container |
+| Pricing grid | `<div>`        | `grid grid-cols-2 gap-3`                                     | 2-column button grid   |
+| Footer       | `<CardFooter>` | `flex-col gap-4 px-6 pb-6`                                   | Footer section         |
 
 ## Styling
 
@@ -108,12 +108,12 @@ Desktop (1440px):
 ### Imports
 
 ```typescript
-import * as React from "react"
-import { Check } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardFooter } from "@/components/ui/card"
-import { cn } from "@/lib/utils"
-import { FeatureItem } from "@/components/FeatureItem"
+import * as React from "react";
+import { Check } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
+import { FeatureItem } from "@/components/FeatureItem";
 ```
 
 ### External Dependencies
@@ -134,10 +134,10 @@ import { FeatureItem } from "@/components/FeatureItem"
 ### FeatureItem
 
 ```typescript
-import { FeatureItem } from "@/components/FeatureItem"
+import { FeatureItem } from "@/components/FeatureItem";
 
 // Usage
-<FeatureItem text="Unlimited Text Messages" />
+<FeatureItem text="Unlimited Text Messages" />;
 ```
 
 **Props**: `{ text: string }`
@@ -163,10 +163,10 @@ The component renders exactly 6 features:
 
 Pricing tiers are derived from `billingCycle` state:
 
-| Cycle | Label | Price | Breakdown |
-|-------|-------|-------|-----------|
-| `'month'` | "Per Month" | `9.99` | (none) |
-| `'year'` | "Per Year" | `99` | "USD 8.25 / Month" |
+| Cycle     | Label       | Price  | Breakdown          |
+| --------- | ----------- | ------ | ------------------ |
+| `'month'` | "Per Month" | `9.99` | (none)             |
+| `'year'`  | "Per Year"  | `99`   | "USD 8.25 / Month" |
 
 **Hardcoded values** (no API calls)
 
@@ -175,6 +175,7 @@ Pricing tiers are derived from `billingCycle` state:
 ### User Interactions
 
 **Click Monthly Button**:
+
 ```
 1. User clicks monthly pricing button
 2. onClick handler: setBillingCycle('month')
@@ -184,6 +185,7 @@ Pricing tiers are derived from `billingCycle` state:
 ```
 
 **Click Yearly Button**:
+
 ```
 1. User clicks yearly pricing button
 2. onClick handler: setBillingCycle('year')
@@ -193,6 +195,7 @@ Pricing tiers are derived from `billingCycle` state:
 ```
 
 **Click CTA Button**:
+
 ```
 1. User clicks "Visual Studio Code →" button
 2. Current implementation: No handler (button is placeholder)
@@ -200,6 +203,7 @@ Pricing tiers are derived from `billingCycle` state:
 ```
 
 **Click Footer Links**:
+
 ```
 1. User clicks Privacy Policy, User Agreement, or EULA
 2. Current implementation: href="#" (no navigation)
@@ -277,21 +281,25 @@ Pricing tiers are derived from `billingCycle` state:
 ### Manual Verification (Per Constitution)
 
 **Viewport Testing**:
+
 - [ ] Mobile (375px): Full-width, readable, no overflow
 - [ ] Tablet (768px): Properly sized, all elements visible
 - [ ] Desktop (1440px): Centered, balanced spacing
 
 **Interaction Testing**:
+
 - [ ] Click monthly button: border black, "$9.99" displays
 - [ ] Click yearly button: border black, "$99" and breakdown display
 - [ ] Toggle repeatedly: smooth, no flashing, < 100ms response
 
 **Visual Testing**:
+
 - [ ] Colors correct: blue CTA (#0066FF), black borders, gray text
 - [ ] Spacing correct: gap-3 between features, gap-4 in footer
 - [ ] Typography correct: text-xs labels, text-2xl prices, text-sm features
 
 **Accessibility Testing**:
+
 - [ ] Tab navigation works
 - [ ] All buttons focusable
 - [ ] Lighthouse accessibility score 90+
@@ -306,25 +314,27 @@ Pricing tiers are derived from `billingCycle` state:
 ### Phase 3: Goal Tracking
 
 ```typescript
-const [selectedGoal, setSelectedGoal] = useLocalStorage('subscription-goal', null)
+const [selectedGoal, setSelectedGoal] = useLocalStorage(
+  "subscription-goal",
+  null
+);
 
 const handleCTAClick = () => {
   setSelectedGoal({
     plan: billingCycle,
     timestamp: new Date().toISOString(),
-  })
-}
+  });
+};
 ```
 
 ### Phase 4: Payment Integration
 
 ```typescript
 const handleCheckout = async () => {
-  const product = billingCycle === 'month' 
-    ? 'monthly-subscription' 
-    : 'annual-subscription'
+  const product =
+    billingCycle === "month" ? "monthly-subscription" : "annual-subscription";
   // Call payment API
-}
+};
 ```
 
 ## Related Documents

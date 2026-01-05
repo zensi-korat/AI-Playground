@@ -3,7 +3,7 @@
 **Feature**: 001-subscription-page  
 **Branch**: `001-subscription-page`  
 **Component**: `src/pages/SubscriptionPage.tsx`  
-**Subcomponent**: `src/components/FeatureItem.tsx`  
+**Subcomponent**: `src/components/FeatureItem.tsx`
 
 ## Prerequisites
 
@@ -27,6 +27,7 @@ npm install
 ```
 
 If date-fns is not yet in package.json (to be verified):
+
 ```bash
 npm install date-fns@^3.0.0
 ```
@@ -62,14 +63,15 @@ Server starts at `http://localhost:5173` (Vite default)
 **Steps**:
 
 1. **Create FeatureItem subcomponent** (`src/components/FeatureItem.tsx`):
+
    ```bash
    cat > src/components/FeatureItem.tsx << 'EOF'
    import { Check } from "lucide-react"
-   
+
    interface FeatureItemProps {
      text: string
    }
-   
+
    export function FeatureItem({ text }: FeatureItemProps) {
      return (
        <li className="flex items-start gap-3 text-sm text-gray-800">
@@ -82,6 +84,7 @@ Server starts at `http://localhost:5173` (Vite default)
    ```
 
 2. **Create SubscriptionPage component** (`src/pages/SubscriptionPage.tsx`):
+
    - Import React, Button, Card components
    - Set up container with flexbox layout
    - Create Card with image section
@@ -89,6 +92,7 @@ Server starts at `http://localhost:5173` (Vite default)
    - Render FeatureItem components
 
 3. **Manual Verification** (Desktop - 1440px):
+
    ```
    ✅ Card is centered with max-width
    ✅ Character image displays with correct aspect ratio
@@ -97,6 +101,7 @@ Server starts at `http://localhost:5173` (Vite default)
    ```
 
 4. **Responsive Check** (Mobile - 375px):
+
    ```
    Open dev tools (F12) → Toggle device toolbar → Select iPhone SE
    ✅ Card is full-width with padding
@@ -120,11 +125,13 @@ Server starts at `http://localhost:5173` (Vite default)
 **Steps**:
 
 1. **Add useState hook**:
+
    ```typescript
-   const [billingCycle, setBillingCycle] = useState<"month" | "year">("month")
+   const [billingCycle, setBillingCycle] = useState<"month" | "year">("month");
    ```
 
 2. **Create pricing buttons**:
+
    - Two-column grid layout
    - Conditional border styling (black when selected)
    - onClick handlers to toggle state
@@ -146,6 +153,7 @@ Server starts at `http://localhost:5173` (Vite default)
 **Steps**:
 
 1. **Create CTA button in CardFooter**:
+
    - Use shadcn Button component
    - Background color: #0066FF (brand-primary)
    - Hover state: #0052CC (darker blue)
@@ -155,12 +163,13 @@ Server starts at `http://localhost:5173` (Vite default)
    - Text: "Visual Studio Code →"
 
 2. **Manual Verification**:
+
    ```
    Desktop (1440px):
    ✅ Button is visually prominent with blue color
    ✅ Hover over button → color darkens (#0052CC)
    ✅ Button has clear text with arrow
-   
+
    Mobile (375px):
    ✅ Button spans full width of card
    ✅ Button is easily tappable (48px height = 44x44px minimum)
@@ -174,12 +183,14 @@ Server starts at `http://localhost:5173` (Vite default)
 **Steps**:
 
 1. **Create security badge**:
+
    - Checkmark icon (SVG or Lucide)
    - Text: "Secured with App Store, Cancel anytime"
    - Small text size (text-xs)
    - Gray color (text-gray-600)
 
 2. **Create footer links**:
+
    - Three links: Privacy Policy, User Agreement, EULA
    - Separated by dividers ("|")
    - Small text size (text-[10px])
@@ -198,6 +209,7 @@ Server starts at `http://localhost:5173` (Vite default)
 ## Verification Checklist
 
 ### User Story 1: View Subscription Offerings
+
 - [ ] Card layout is centered and responsive
 - [ ] Character image displays with correct aspect ratio
 - [ ] All 6 features are visible with checkmarks
@@ -207,12 +219,14 @@ Server starts at `http://localhost:5173` (Vite default)
 - [ ] Desktop (1440px): Centered, all visible without scroll
 
 ### User Story 2: Switch Between Pricing Plans
+
 - [ ] Monthly button: click → border black, "$9.99" displays
 - [ ] Yearly button: click → border black, "$99" and "USD 8.25 / Month" display
 - [ ] Toggle between buttons → no delay, smooth transitions
 - [ ] Response time < 100ms (measure with dev tools performance tab)
 
 ### User Story 3: Proceed to Checkout
+
 - [ ] CTA button is blue (#0066FF) with white text
 - [ ] Hover state: darker blue (#0052CC)
 - [ ] Full-width button, 48px height
@@ -221,6 +235,7 @@ Server starts at `http://localhost:5173` (Vite default)
 - [ ] Desktop: button is prominent and clickable
 
 ### User Story 4: Trust and Legal Compliance
+
 - [ ] Security badge displays with checkmark icon
 - [ ] Text: "Secured with App Store, Cancel anytime"
 - [ ] Footer: 3 links (Privacy Policy, User Agreement, EULA) separated by dividers
@@ -233,6 +248,7 @@ Server starts at `http://localhost:5173` (Vite default)
 ### Breakpoint Testing
 
 **Mobile (375px)**:
+
 ```bash
 # Dev Tools → Toggle Device Toolbar → iPhone SE
 # Verify:
@@ -245,6 +261,7 @@ Server starts at `http://localhost:5173` (Vite default)
 ```
 
 **Tablet (768px)**:
+
 ```bash
 # Dev Tools → iPad
 # Verify:
@@ -256,6 +273,7 @@ Server starts at `http://localhost:5173` (Vite default)
 ```
 
 **Desktop (1440px)**:
+
 ```bash
 # Dev Tools → Close device toolbar (or set viewport to 1440px)
 # Verify:
@@ -268,6 +286,7 @@ Server starts at `http://localhost:5173` (Vite default)
 ### Browser Compatibility
 
 Test in:
+
 - Chrome (latest) ✅
 - Firefox (latest) ✅
 - Safari (latest) ✅
@@ -305,6 +324,7 @@ Test in:
 ### Issue: Button styles not applying
 
 **Check**:
+
 1. Verify Tailwind is configured: `grep @tailwind src/index.css`
 2. Verify shadcn Button is imported: `ls src/components/ui/button.tsx`
 3. Check for typos in className props
@@ -313,6 +333,7 @@ Test in:
 ### Issue: Icons not showing (Check, etc.)
 
 **Check**:
+
 1. Verify Lucide React is installed: `npm ls lucide-react`
 2. Check import path: `import { Check } from "lucide-react"`
 3. Verify icon name is correct: [Lucide Icons](https://lucide.dev/)
@@ -320,6 +341,7 @@ Test in:
 ### Issue: Card not centered
 
 **Check**:
+
 1. Parent container uses `flex` with `items-center`
 2. Card has `max-w-md` class
 3. Container is `min-h-screen`
@@ -327,6 +349,7 @@ Test in:
 ### Issue: Responsive not working
 
 **Check**:
+
 1. Verify Tailwind is processing the file: `npm run build`
 2. Check for typos in breakpoint prefixes: `sm:`, `md:`, `lg:`
 3. Verify `tailwind.config.ts` includes the correct content paths

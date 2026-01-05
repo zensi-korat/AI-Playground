@@ -23,14 +23,14 @@ Build a visually rich, responsive subscription offer page using React 19, Tailwi
 
 _GATE: Must pass before Phase 0 research. Re-check after Phase 1 design._
 
-| Principle | Compliance | Notes |
-|-----------|-----------|-------|
-| **Clean Code** | ✅ PASS | Component-based structure, reusable subcomponents (FeatureItem), clear naming conventions |
-| **Simple UX** | ✅ PASS | Single card layout, minimal interaction (click to toggle pricing), no unnecessary features, clear CTA |
-| **Responsive Design** | ✅ PASS | Mobile-first Tailwind approach, 3 breakpoints tested (375px, 768px, 1440px) |
-| **Minimal Dependencies** | ✅ PASS | Uses existing stack (React, Tailwind, Lucide, shadcn); no new heavy libraries; date-fns adds ~14KB gzipped (justified for date formatting) |
-| **Zero Testing** | ✅ PASS | No test files, no test frameworks, all QA via manual browser verification |
-| **Overall** | ✅ **PASS GATE** | Feature complies with all constitutional principles. Ready for Phase 0 research. |
+| Principle                | Compliance       | Notes                                                                                                                                      |
+| ------------------------ | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Clean Code**           | ✅ PASS          | Component-based structure, reusable subcomponents (FeatureItem), clear naming conventions                                                  |
+| **Simple UX**            | ✅ PASS          | Single card layout, minimal interaction (click to toggle pricing), no unnecessary features, clear CTA                                      |
+| **Responsive Design**    | ✅ PASS          | Mobile-first Tailwind approach, 3 breakpoints tested (375px, 768px, 1440px)                                                                |
+| **Minimal Dependencies** | ✅ PASS          | Uses existing stack (React, Tailwind, Lucide, shadcn); no new heavy libraries; date-fns adds ~14KB gzipped (justified for date formatting) |
+| **Zero Testing**         | ✅ PASS          | No test files, no test frameworks, all QA via manual browser verification                                                                  |
+| **Overall**              | ✅ **PASS GATE** | Feature complies with all constitutional principles. Ready for Phase 0 research.                                                           |
 
 ## Project Structure
 
@@ -87,18 +87,22 @@ NOTE: AI-Playground constitution prohibits testing - no tests/ directory
 ### Research Tasks
 
 1. **Tailwind @theme Configuration**: Understand how to define custom colors via @theme directive in tailwind.config.ts for brand colors, accent colors, and state colors
+
    - **Decision**: Use Tailwind's @theme for subscription page brand colors (#0066FF CTA button, black borders, gray accents)
    - **Rationale**: Aligns with Figma design tokens sync workflow; enables CSS variable generation for consistency
 
 2. **shadcn/ui Component Library**: Evaluate which shadcn/ui components are most suitable for subscription page (Button, Card, already in use)
+
    - **Decision**: Use existing shadcn Button and Card components; no additional shadcn components needed for MVP
    - **Rationale**: Button and Card already in project; components are low-dependency, align with Radix UI constraint
 
 3. **localStorage for Goals (Future)**: Research React patterns for localStorage integration for optional goal tracking feature (deferred to P3)
+
    - **Decision**: Use React Context + custom hook (useLocalStorage) for future integration
    - **Rationale**: Avoids testing complexity; simple synchronous API; no external library needed
 
 4. **date-fns Integration**: Verify date-fns is available and suitable for date formatting (future analytics feature)
+
    - **Decision**: Add date-fns ^3.0.0 to package.json (justified for date formatting; ~14KB gzipped; actively maintained)
    - **Rationale**: Minimal footprint, widely used, handles timezone concerns elegantly
 
@@ -148,16 +152,16 @@ SubscriptionPage (page component)
 ```typescript
 // PricingPlan - represents a subscription tier
 interface PricingPlan {
-  name: 'month' | 'year'
-  price: number
-  label: string
-  breakdown?: string  // e.g., "USD 8.25 / Month"
+  name: "month" | "year";
+  price: number;
+  label: string;
+  breakdown?: string; // e.g., "USD 8.25 / Month"
 }
 
 // SubscriptionFeature - represents a feature row
 interface SubscriptionFeature {
-  text: string
-  icon?: React.ReactNode
+  text: string;
+  icon?: React.ReactNode;
 }
 
 // Component Props
@@ -166,7 +170,7 @@ interface SubscriptionPageProps {
 }
 
 interface FeatureItemProps {
-  text: string
+  text: string;
 }
 ```
 
@@ -185,20 +189,23 @@ interface FeatureItemProps {
 ### Component APIs
 
 **SubscriptionPage.tsx**
+
 ```typescript
-export default function SubscriptionPage(): JSX.Element
+export default function SubscriptionPage(): JSX.Element;
 ```
 
 **FeatureItem.tsx** (subcomponent)
+
 ```typescript
 interface FeatureItemProps {
-  text: string
+  text: string;
 }
 
-export function FeatureItem({ text }: FeatureItemProps): JSX.Element
+export function FeatureItem({ text }: FeatureItemProps): JSX.Element;
 ```
 
 **Styling**
+
 - Component uses `cn()` utility (from @/lib/utils) to conditionally merge Tailwind classes
 - No CSS files needed; all styles via Tailwind classes
 
@@ -232,13 +239,13 @@ Phase 2 will generate tasks.md with detailed, independent tasks for:
 
 ## Complexity Tracking
 
-| Consideration | Status | Justification |
-|---|---|---|
-| **date-fns Dependency** | Justified | Added for date formatting (future analytics); ~14KB gzipped; no alternative within minimal-dependencies constraint |
-| **localStorage Usage** | P3 Deferral | Optional goal tracking feature deferred to Phase 3; not needed for MVP |
-| **Component Substructure** | Simple | Single subcomponent (FeatureItem); no complex prop drilling or state management needed |
-| **Styling Complexity** | Low | Tailwind @theme approach; no custom CSS files or BEM conventions needed |
-| **API Integrations** | None | All data hardcoded in component for MVP; payment processing deferred |
+| Consideration              | Status      | Justification                                                                                                      |
+| -------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------ |
+| **date-fns Dependency**    | Justified   | Added for date formatting (future analytics); ~14KB gzipped; no alternative within minimal-dependencies constraint |
+| **localStorage Usage**     | P3 Deferral | Optional goal tracking feature deferred to Phase 3; not needed for MVP                                             |
+| **Component Substructure** | Simple      | Single subcomponent (FeatureItem); no complex prop drilling or state management needed                             |
+| **Styling Complexity**     | Low         | Tailwind @theme approach; no custom CSS files or BEM conventions needed                                            |
+| **API Integrations**       | None        | All data hardcoded in component for MVP; payment processing deferred                                               |
 
 ## Next Steps
 

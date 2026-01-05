@@ -3,7 +3,7 @@
 **Component**: `src/components/FeatureItem.tsx`  
 **Type**: Presentational Subcomponent (React Functional Component)  
 **Status**: To be implemented  
-**Phase**: Phase 1  
+**Phase**: Phase 1
 
 ## Overview
 
@@ -12,7 +12,7 @@ FeatureItem is a simple, reusable subcomponent that renders a single feature lis
 ## Component Signature
 
 ```typescript
-export function FeatureItem({ text }: FeatureItemProps): JSX.Element
+export function FeatureItem({ text }: FeatureItemProps): JSX.Element;
 ```
 
 **Props**: `FeatureItemProps`
@@ -23,15 +23,15 @@ export function FeatureItem({ text }: FeatureItemProps): JSX.Element
 
 ```typescript
 interface FeatureItemProps {
-  text: string
+  text: string;
 }
 ```
 
 ### Prop Details
 
-| Prop | Type | Required | Description | Example |
-|------|------|----------|-------------|---------|
-| `text` | `string` | Yes | Feature description to display | `"Unlimited Text Messages"` |
+| Prop   | Type     | Required | Description                    | Example                     |
+| ------ | -------- | -------- | ------------------------------ | --------------------------- |
+| `text` | `string` | Yes      | Feature description to display | `"Unlimited Text Messages"` |
 
 ## Render Output
 
@@ -61,6 +61,7 @@ interface FeatureItemProps {
 ### Classes Used
 
 - **Container**: `flex items-start gap-3 text-sm text-gray-800`
+
   - `flex`: Flexbox layout
   - `items-start`: Align icon and text at top
   - `gap-3`: 12px horizontal spacing between icon and text
@@ -75,24 +76,24 @@ interface FeatureItemProps {
 
 ### Color Values
 
-| Element | Tailwind Class | CSS Value | Hex |
-|---------|---|---|---|
-| Text | `text-gray-800` | dark gray | `#1f2937` |
-| Icon | `text-black` | pure black | `#000000` |
-| Background | (inherited) | white | `#ffffff` |
+| Element    | Tailwind Class  | CSS Value  | Hex       |
+| ---------- | --------------- | ---------- | --------- |
+| Text       | `text-gray-800` | dark gray  | `#1f2937` |
+| Icon       | `text-black`    | pure black | `#000000` |
+| Background | (inherited)     | white      | `#ffffff` |
 
 ## Component Dependencies
 
 ### Imports
 
 ```typescript
-import { Check } from "lucide-react"
+import { Check } from "lucide-react";
 
 interface FeatureItemProps {
-  text: string
+  text: string;
 }
 
-export function FeatureItem({ text }: FeatureItemProps): JSX.Element
+export function FeatureItem({ text }: FeatureItemProps): JSX.Element;
 ```
 
 ### External Dependencies
@@ -116,6 +117,7 @@ export function FeatureItem({ text }: FeatureItemProps): JSX.Element
 ```
 
 **Renders**:
+
 ```html
 <li class="flex items-start gap-3 text-sm text-gray-800">
   <svg class="h-4 w-4 mt-0.5 shrink-0 text-black"><!-- Check icon --></svg>
@@ -143,21 +145,23 @@ export function FeatureItem({ text }: FeatureItemProps): JSX.Element
 ### Props Changes
 
 When the `text` prop changes:
+
 1. Component re-renders
 2. Icon remains the same
 3. Text content updates
 4. No state management needed
 
 **Example**:
+
 ```typescript
-const [feature, setFeature] = useState("Original Text")
+const [feature, setFeature] = useState("Original Text");
 
 return (
   <>
     <FeatureItem text={feature} />
     <button onClick={() => setFeature("Updated Text")}>Update</button>
   </>
-)
+);
 
 // Clicking button updates text in FeatureItem
 ```
@@ -216,6 +220,7 @@ return (
 **Input**: "This is a very long feature description that might wrap to multiple lines because the card has limited width"
 
 **Rendering**:
+
 ```
 ✓ Icon (checkmark) stays aligned to top
 ✓ Text wraps naturally
@@ -230,6 +235,7 @@ return (
 **Input**: `text=""`
 
 **Rendering**:
+
 ```
 ✓ Icon displays
 ✓ Empty span renders (no text)
@@ -243,6 +249,7 @@ return (
 **Input**: "Text"
 
 **Rendering**:
+
 ```
 ✓ Single line
 ✓ Icon aligned to top
@@ -254,6 +261,7 @@ return (
 **Input**: `"Remove Ads & Spam"`
 
 **Rendering**:
+
 ```
 ✓ All characters display correctly
 ✓ No HTML escaping issues (React handles automatically)
@@ -264,6 +272,7 @@ return (
 ### Manual Verification
 
 **Single item**:
+
 ```tsx
 <FeatureItem text="Unlimited Text Messages" />
 
@@ -276,6 +285,7 @@ return (
 ```
 
 **Multiple items in list**:
+
 ```tsx
 <ul className="space-y-3">
   <FeatureItem text="Feature 1" />
@@ -291,6 +301,7 @@ return (
 ```
 
 **Responsive testing**:
+
 ```
 Mobile (375px), Tablet (768px), Desktop (1440px)
 // Verify:
@@ -344,6 +355,7 @@ This is a **presentational component** - no state, no logic, no side effects. It
 ### Maintenance
 
 The component should be easy to update:
+
 - To change icon: Modify Lucide import
 - To change colors: Update Tailwind classes
 - To change spacing: Modify gap and margin values
@@ -377,20 +389,17 @@ If you need variant styling:
 
 ```typescript
 interface FeatureItemProps {
-  text: string
-  variant?: 'default' | 'highlighted' | 'disabled'
+  text: string;
+  variant?: "default" | "highlighted" | "disabled";
 }
 
-export function FeatureItem({ text, variant = 'default' }: FeatureItemProps) {
-  const classes = cn(
-    'flex items-start gap-3 text-sm',
-    {
-      'text-gray-800': variant === 'default',
-      'text-brand-primary': variant === 'highlighted',
-      'text-gray-400 line-through': variant === 'disabled',
-    }
-  )
-  return <li className={classes}>{/* ... */}</li>
+export function FeatureItem({ text, variant = "default" }: FeatureItemProps) {
+  const classes = cn("flex items-start gap-3 text-sm", {
+    "text-gray-800": variant === "default",
+    "text-brand-primary": variant === "highlighted",
+    "text-gray-400 line-through": variant === "disabled",
+  });
+  return <li className={classes}>{/* ... */}</li>;
 }
 ```
 
