@@ -15,6 +15,34 @@ This project is a React implementation of the ProLine Design System, directly sy
     npm run dev
     ```
 
+## Project Constitution
+
+This project follows strict constitutional principles defined in `.specify/memory/constitution.md`:
+
+- **Clean Code**: Readable, maintainable, self-documenting code
+- **Simple UX**: Intuitive interfaces with minimal cognitive load
+- **Responsive Design**: Mobile-first, works on all screen sizes
+- **Minimal Dependencies**: Lean dependency tree, security-conscious
+- **NO TESTING**: Zero testing (no unit/integration/e2e tests) - quality ensured through manual verification and code review
+
+### Updating the Constitution
+
+To update the project constitution with AI assistance:
+
+```bash
+# Using GitHub Copilot with custom prompt
+Follow instructions in .github/prompts/speckit.constitution.prompt.md
+```
+
+The constitution command will:
+
+- Update principles and governance rules
+- Increment version according to semantic versioning
+- Propagate changes to dependent templates
+- Generate a sync impact report
+
+See `.specify/memory/constitution.md` for full details.
+
 ## Design System Workflow
 
 ### Source of Truth
