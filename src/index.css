@@ -28,6 +28,15 @@
   --button-primary-fg: #ffffff;
   --button-primary-border: #0584ff;
   --button-tertiary-fg: #d0d5dd;
+
+  /* Subscription Page Brand Colors */
+  --color-brand-primary: #0066ff;
+  --color-brand-primary-hover: #0052cc;
+  --color-text-default: #000000;
+  --color-border-active: #000000;
+  --color-text-secondary: #666666;
+  --color-text-tertiary: #505050;
+  
   --colors-blue100: #d1e9ff;
   --colors-blue200: #b2ddff;
   --colors-blue25: #f5faff;

@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Check } from "lucide-react"
+import { FeatureItem } from "@/components/FeatureItem"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
@@ -71,7 +71,14 @@ export default function SubscriptionPage() {
                 <span>Secured with App Store, Cancel anytime</span>
               </div>
 
-              <Button className="w-full bg-[#0066FF] hover:bg-[#0052CC] text-white rounded-lg h-12 text-base font-semibold">
+              <Button 
+                className="w-full text-white rounded-lg h-12 text-base font-semibold"
+                style={{ 
+                  backgroundColor: 'var(--color-brand-primary)',
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--color-brand-primary-hover)'}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--color-brand-primary)'}
+              >
                 Visual Studio Code →
               </Button>
 
@@ -87,14 +94,5 @@ export default function SubscriptionPage() {
         </div>
       </main>
     </div>
-  )
-}
-
-function FeatureItem({ text }: { text: string }) {
-  return (
-    <li className="flex items-start gap-3 text-sm text-gray-800">
-      <Check className="h-4 w-4 mt-0.5 shrink-0 text-black" />
-      <span>{text}</span>
-    </li>
   )
 }

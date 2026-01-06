@@ -17,15 +17,15 @@ This document provides a detailed, step-by-step task breakdown for implementing 
 
 ## Executive Summary
 
-| Phase | User Story | Priority | Task Count | Parallelizable | Duration |
-|-------|-----------|----------|-----------|---|---|
-| Phase 1 | Setup | N/A | 3 | Yes | 15 min |
-| Phase 2 | Foundational | N/A | 2 | Yes | 10 min |
-| Phase 3 | US1: View Offerings | P1 | 7 | Yes (3 parallel) | 45 min |
-| Phase 4 | US2: Pricing Toggle | P2 | 5 | Yes (2 parallel) | 30 min |
-| Phase 5 | US3: CTA Button | P2 | 5 | Yes (2 parallel) | 25 min |
-| Phase 6 | US4: Trust/Compliance | P3 | 8 | Yes (3 parallel) | 30 min |
-| Phase 7 | Polish | N/A | 3 | Yes | 20 min |
+| Phase   | User Story            | Priority | Task Count | Parallelizable   | Duration |
+| ------- | --------------------- | -------- | ---------- | ---------------- | -------- |
+| Phase 1 | Setup                 | N/A      | 3          | Yes              | 15 min   |
+| Phase 2 | Foundational          | N/A      | 2          | Yes              | 10 min   |
+| Phase 3 | US1: View Offerings   | P1       | 7          | Yes (3 parallel) | 45 min   |
+| Phase 4 | US2: Pricing Toggle   | P2       | 5          | Yes (2 parallel) | 30 min   |
+| Phase 5 | US3: CTA Button       | P2       | 5          | Yes (2 parallel) | 25 min   |
+| Phase 6 | US4: Trust/Compliance | P3       | 8          | Yes (3 parallel) | 30 min   |
+| Phase 7 | Polish                | N/A      | 3          | Yes              | 20 min   |
 
 ---
 
@@ -33,12 +33,13 @@ This document provides a detailed, step-by-step task breakdown for implementing 
 
 ### Verify Project Dependencies
 
-- [ ] T001 Verify Node.js and npm versions (Node 18+, npm 9+)
-- [ ] T002 [P] Verify React 19.2.0 and Tailwind CSS 4.1.18 installed in package.json
-- [ ] T003 [P] Verify shadcn/ui Button and Card components exist at src/components/ui/button.tsx and src/components/ui/card.tsx
+- [X] T001 Verify Node.js and npm versions (Node 18+, npm 9+)
+- [X] T002 [P] Verify React 19.2.0 and Tailwind CSS 4.1.18 installed in package.json
+- [X] T003 [P] Verify shadcn/ui Button and Card components exist at src/components/ui/button.tsx and src/components/ui/card.tsx
 
 **Duration**: 15 minutes  
 **Success Criteria**:
+
 - ✅ Node version check passes (18.0.0+)
 - ✅ package.json contains React 19.2.0+ and Tailwind CSS 4.1.18+
 - ✅ Both shadcn components exist and import cleanly
@@ -49,12 +50,13 @@ This document provides a detailed, step-by-step task breakdown for implementing 
 
 ### Configure Tailwind Theme Colors
 
-- [ ] T004 [P] Update tailwind.config.ts to extend theme with brand colors (#0066FF, #0052CC, #000000 borders, gray accents)
-- [ ] T005 [P] Add @theme directives to src/index.css for brand color CSS variables (--color-brand-primary, --color-brand-hover, --color-text-default, etc.)
+- [X] T004 [P] Update tailwind.config.ts to extend theme with brand colors (#0066FF, #0052CC, #000000 borders, gray accents)
+- [X] T005 [P] Add @theme directives to src/index.css for brand color CSS variables (--color-brand-primary, --color-brand-hover, --color-text-default, etc.)
 
 **Dependencies**: Phase 1 (all tasks)  
 **Duration**: 10 minutes  
 **Success Criteria**:
+
 - ✅ Tailwind config includes all 6 brand colors
 - ✅ index.css contains @theme block with CSS variable definitions
 - ✅ Classes like `bg-brand-primary` resolve correctly in dev server
@@ -67,6 +69,7 @@ This document provides a detailed, step-by-step task breakdown for implementing 
 **User Story**: "As a user, I want to view the subscription offerings in a responsive card layout with features list, so I can understand what's included in the subscription"
 
 **Independent Test Criteria**:
+
 - ✅ SubscriptionPage component renders without errors
 - ✅ Card displays with responsive layout (full-width mobile, centered on desktop)
 - ✅ 6 features render correctly with checkmark icons
@@ -77,14 +80,15 @@ This document provides a detailed, step-by-step task breakdown for implementing 
 
 ### Create FeatureItem Subcomponent
 
-- [ ] T006 Create src/components/FeatureItem.tsx with FeatureItemProps interface (text: string)
-- [ ] T007 [P] Implement FeatureItem render: `<li>` with Lucide Check icon (4x4px, black) and text span
-- [ ] T008 [P] Style FeatureItem with Tailwind: flex items-start gap-3 text-sm text-gray-800 (semantic HTML, no role needed)
+- [X] T006 Create src/components/FeatureItem.tsx with FeatureItemProps interface (text: string)
+- [X] T007 [P] Implement FeatureItem render: `<li>` with Lucide Check icon (4x4px, black) and text span
+- [X] T008 [P] Style FeatureItem with Tailwind: flex items-start gap-3 text-sm text-gray-800 (semantic HTML, no role needed)
 
 **Dependencies**: Phase 2 (all tasks)  
 **Parallelizable**: T007 and T008 can run in parallel  
 **Duration**: 15 minutes  
 **Success Criteria**:
+
 - ✅ FeatureItem exports correctly from src/components/FeatureItem.tsx
 - ✅ Component accepts text prop and renders in `<li>` element
 - ✅ Check icon displays with correct size and color
@@ -93,14 +97,15 @@ This document provides a detailed, step-by-step task breakdown for implementing 
 
 ### Create SubscriptionPage Container & Layout
 
-- [ ] T009 Create src/pages/SubscriptionPage.tsx as default export JSX.Element
-- [ ] T010 [P] Implement main flex container: flex justify-center items-center min-h-screen bg-white
-- [ ] T011 [P] Add responsive max-width Card using shadcn Card: max-w-md on desktop, full-width on mobile
+- [X] T009 Create src/pages/SubscriptionPage.tsx as default export JSX.Element
+- [X] T010 [P] Implement main flex container: flex justify-center items-center min-h-screen bg-white
+- [X] T011 [P] Add responsive max-width Card using shadcn Card: max-w-md on desktop, full-width on mobile
 
 **Dependencies**: T005 (Tailwind config)  
 **Parallelizable**: T010 and T011 can run in parallel  
 **Duration**: 15 minutes  
 **Success Criteria**:
+
 - ✅ SubscriptionPage exports as default function
 - ✅ Component renders without props needed
 - ✅ Container is centered with proper flex alignment
@@ -109,14 +114,15 @@ This document provides a detailed, step-by-step task breakdown for implementing 
 
 ### Implement Features List
 
-- [ ] T012 [P] [US1] Create features data array in SubscriptionPage.tsx with 6 feature texts
-- [ ] T013 [P] [US1] Render features list: `<ul>` with space-y-3 gap, map over array calling FeatureItem for each
-- [ ] T014 [P] [US1] Style features section: CardContent with space-y-6, ul with proper list styling
+- [X] T012 [P] [US1] Create features data array in SubscriptionPage.tsx with 6 feature texts
+- [X] T013 [P] [US1] Render features list: `<ul>` with space-y-3 gap, map over array calling FeatureItem for each
+- [X] T014 [P] [US1] Style features section: CardContent with space-y-6, ul with proper list styling
 
 **Dependencies**: T006-T011 (all components)  
 **Parallelizable**: T012, T013, T014 can run in parallel  
 **Duration**: 15 minutes  
 **Success Criteria**:
+
 - ✅ Features array contains exactly 6 items
 - ✅ All 6 FeatureItem components render with correct text
 - ✅ List is properly spaced (space-y-3 between items)
@@ -133,6 +139,7 @@ This document provides a detailed, step-by-step task breakdown for implementing 
 **Parallelizable**: T015, T016, T017 can run in parallel (use browser dev tools)  
 **Duration**: 15 minutes  
 **Success Criteria**:
+
 - ✅ Mobile (375px): No text overflow, icons visible, card full-width
 - ✅ Tablet (768px): Card centered with padding, readable spacing
 - ✅ Desktop (1440px): Card at 448px max width, centered, clean appearance
@@ -148,6 +155,7 @@ This document provides a detailed, step-by-step task breakdown for implementing 
 **User Story**: "As a user, I want to toggle between monthly ($9.99) and yearly ($99) pricing options with clear price breakdowns, so I can see the best deal for my needs"
 
 **Independent Test Criteria**:
+
 - ✅ Two pricing buttons render (monthly and yearly)
 - ✅ Clicking monthly button shows $9.99, clicking yearly shows $99 + breakdown
 - ✅ State toggles correctly (billingCycle updates on click)
@@ -165,6 +173,7 @@ This document provides a detailed, step-by-step task breakdown for implementing 
 **Parallelizable**: T018 and T019 can run in parallel  
 **Duration**: 10 minutes  
 **Success Criteria**:
+
 - ✅ useState hook is properly typed as "month" | "year"
 - ✅ Initial state is "month"
 - ✅ Pricing data includes both tiers with all required fields
@@ -180,6 +189,7 @@ This document provides a detailed, step-by-step task breakdown for implementing 
 **Parallelizable**: T021 and T022 can run in parallel  
 **Duration**: 15 minutes  
 **Success Criteria**:
+
 - ✅ Pricing buttons render in 2-column grid
 - ✅ Monthly button shows "$9.99" and "Per Month"
 - ✅ Yearly button shows "$99" and "Per Year" with breakdown "USD 8.25 / Month"
@@ -195,6 +205,7 @@ This document provides a detailed, step-by-step task breakdown for implementing 
 **Dependencies**: T020-T022 (buttons rendered)  
 **Duration**: 10 minutes  
 **Success Criteria**:
+
 - ✅ Active button (billingCycle match) shows black border and light background
 - ✅ Inactive button shows gray border and white background
 - ✅ Toggle is instant (< 100ms response time)
@@ -210,6 +221,7 @@ This document provides a detailed, step-by-step task breakdown for implementing 
 **User Story**: "As a user, I want a prominent call-to-action button to proceed to checkout, so I can easily start my subscription"
 
 **Independent Test Criteria**:
+
 - ✅ CTA button renders with text "Visual Studio Code →"
 - ✅ Button styling is prominent (#0066FF primary blue)
 - ✅ Button shows hover state (#0052CC darker blue)
@@ -227,6 +239,7 @@ This document provides a detailed, step-by-step task breakdown for implementing 
 **Parallelizable**: T025 and T026 can run in parallel  
 **Duration**: 10 minutes  
 **Success Criteria**:
+
 - ✅ CardFooter renders below pricing buttons
 - ✅ CTA button renders with text "Visual Studio Code →"
 - ✅ Button uses brand primary color (#0066FF)
@@ -243,6 +256,7 @@ This document provides a detailed, step-by-step task breakdown for implementing 
 **Parallelizable**: T027, T028, T029 can run in parallel  
 **Duration**: 15 minutes  
 **Success Criteria**:
+
 - ✅ Hover state changes to #0052CC (darker blue)
 - ✅ Button text is visible in white
 - ✅ Arrow character displays correctly
@@ -259,6 +273,7 @@ This document provides a detailed, step-by-step task breakdown for implementing 
 **User Story**: "As a user, I want to see security badges and links to privacy/legal documents, so I can trust the service and understand the terms"
 
 **Independent Test Criteria**:
+
 - ✅ Security badge renders with checkmark icon and text "Secured with App Store, Cancel anytime"
 - ✅ Privacy Policy, User Agreement, and EULA links render
 - ✅ Links are semantic `<a>` tags with href attributes
@@ -278,6 +293,7 @@ This document provides a detailed, step-by-step task breakdown for implementing 
 **Parallelizable**: T031 and T032 can run in parallel  
 **Duration**: 15 minutes  
 **Success Criteria**:
+
 - ✅ Security badge renders above CTA button
 - ✅ Checkmark icon displays with correct color and size
 - ✅ Badge text is readable (text-xs, gray-600 for secondary info)
@@ -294,6 +310,7 @@ This document provides a detailed, step-by-step task breakdown for implementing 
 **Parallelizable**: T033, T034, T035 can run in parallel  
 **Duration**: 15 minutes  
 **Success Criteria**:
+
 - ✅ Footer links section renders below CTA button
 - ✅ Three links render with correct text (Privacy Policy, User Agreement, EULA)
 - ✅ Links are semantic `<a>` tags (not buttons)
@@ -310,6 +327,7 @@ This document provides a detailed, step-by-step task breakdown for implementing 
 **Parallelizable**: T036 and T037 can run in parallel  
 **Duration**: 10 minutes  
 **Success Criteria**:
+
 - ✅ Links have text-gray-600 color initially
 - ✅ Links show underline on hover
 - ✅ Footer layout is single row on all viewports
@@ -332,6 +350,7 @@ This document provides a detailed, step-by-step task breakdown for implementing 
 
 **Duration**: 15 minutes  
 **Success Criteria**:
+
 - ✅ Mobile (375px): All content visible, no overflow, touchable buttons (44x44px)
 - ✅ Tablet (768px): Proper spacing, readable text, card centered
 - ✅ Desktop (1440px): Card at 448px max width, clean layout, professional
@@ -346,6 +365,7 @@ This document provides a detailed, step-by-step task breakdown for implementing 
 
 **Duration**: 15 minutes  
 **Success Criteria**:
+
 - ✅ Lighthouse Performance: 90+
 - ✅ Lighthouse Accessibility: 90+
 - ✅ Lighthouse Best Practices: 90+
@@ -362,6 +382,7 @@ This document provides a detailed, step-by-step task breakdown for implementing 
 
 **Duration**: 10 minutes  
 **Success Criteria**:
+
 - ✅ No console.log statements or debug code
 - ✅ All TypeScript types properly annotated
 - ✅ Variable and component names are clear and descriptive
@@ -389,6 +410,7 @@ This document provides a detailed, step-by-step task breakdown for implementing 
 ### Parallelization Examples
 
 **Example 1: Phase 3 Parallelization** (5 developers, 15 min execution)
+
 - Developer A: T006-T008 (FeatureItem component)
 - Developer B: T009-T011 (main container)
 - Developer C: T012-T014 (features list)
@@ -396,12 +418,14 @@ This document provides a detailed, step-by-step task breakdown for implementing 
 - Result: US1 complete in 15 min with parallel execution
 
 **Example 2: Phase 4 Parallelization** (3 developers, 10 min execution)
+
 - Developer A: T018-T019 (state and data)
 - Developer B: T021-T022 (pricing buttons)
 - Developer C: T023-T024 (active state styling)
 - Result: US2 complete in 10 min with parallel execution
 
 **Example 3: Phase 6 Parallelization** (4 developers, 10 min execution)
+
 - Developer A: T030-T032 (security badge)
 - Developer B: T033-T035 (footer links)
 - Developer C+D: Responsive testing
@@ -409,11 +433,11 @@ This document provides a detailed, step-by-step task breakdown for implementing 
 
 ### Estimated Timeline
 
-| Scenario | Duration | Notes |
-|----------|----------|-------|
-| **Sequential** (1 dev) | 3-4 hours | All tasks in order, no parallelization |
-| **Distributed** (4-5 devs) | 1.5-2 hours | Parallel execution within phases |
-| **Agile** (2-3 devs) | 2-2.5 hours | Balanced parallelization |
+| Scenario                   | Duration    | Notes                                  |
+| -------------------------- | ----------- | -------------------------------------- |
+| **Sequential** (1 dev)     | 3-4 hours   | All tasks in order, no parallelization |
+| **Distributed** (4-5 devs) | 1.5-2 hours | Parallel execution within phases       |
+| **Agile** (2-3 devs)       | 2-2.5 hours | Balanced parallelization               |
 
 ---
 
@@ -465,7 +489,7 @@ Phase 7: Polish (depends on Phase 6)
 **Phase 4 (US2)**: Pricing toggle working with state updates ✅  
 **Phase 5 (US3)**: CTA button styled and responsive ✅  
 **Phase 6 (US4)**: Trust badges and footer links complete ✅  
-**Phase 7 (Polish)**: All verification passed, ready for merge ✅  
+**Phase 7 (Polish)**: All verification passed, ready for merge ✅
 
 **Final Gate**: Lighthouse 90+, responsive on 375/768/1440px, toggle < 100ms, load < 3s, no console errors ✅
 
@@ -486,6 +510,7 @@ Phase 7: Polish (depends on Phase 6)
 All tasks are defined, sequenced, and ready for execution. Begin with Phase 1 (Setup) and follow the dependency graph for optimal execution path.
 
 **Next Steps**:
+
 1. Execute Phase 1 (Setup verification)
 2. Execute Phase 2 (Tailwind configuration)
 3. Execute Phase 3 (US1: Features layout)
