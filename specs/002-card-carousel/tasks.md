@@ -82,10 +82,10 @@ Note: US2, US3, US4 all depend on SubscriptionCarousel component existing (T007-
 
 **Checkpoint**: Development environment ready for implementation
 
-- [ ] T001 Verify Node.js 23.8.0+, npm 10.9.2+, React 19.2.0, TypeScript 5.9.3 are installed
-- [ ] T002 Verify Tailwind CSS 4.1.18 configured (check src/index.css has @import "tailwindcss")
-- [ ] T003 Verify shadcn/ui Button and Card components exist in src/components/ui/
-- [ ] T004 Install embla-carousel-react dependency (~13KB gzipped) via npm install embla-carousel-react
+- [x] T001 Verify Node.js 23.8.0+, npm 10.9.2+, React 19.2.0, TypeScript 5.9.3 are installed
+- [x] T002 Verify Tailwind CSS 4.1.18 configured (check src/index.css has @import "tailwindcss")
+- [x] T003 Verify shadcn/ui Button and Card components exist in src/components/ui/
+- [x] T004 Install embla-carousel-react dependency (~13KB gzipped) via npm install embla-carousel-react
 
 **Checkpoint**: ✅ Dependencies installed, prerequisites verified
 
@@ -97,9 +97,9 @@ Note: US2, US3, US4 all depend on SubscriptionCarousel component existing (T007-
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T005 [P] Create src/types/subscription.ts with SubscriptionCard and BillingCycle interfaces per data-model.md
-- [ ] T006 [P] Add 3-5 character images to public/clips-images/ directory (or verify they exist)
-- [ ] T007 Create hardcoded SUBSCRIPTION_CARDS array with 3 sample cards in src/components/SubscriptionCarousel.tsx (Basic, Premium, Enterprise plans)
+- [x] T005 [P] Create src/types/subscription.ts with SubscriptionCard and BillingCycle interfaces per data-model.md
+- [x] T006 [P] Add 3-5 character images to public/clips-images/ directory (or verify they exist)
+- [x] T007 Create hardcoded SUBSCRIPTION_CARDS array with 3 sample cards in src/components/SubscriptionCarousel.tsx (Basic, Premium, Enterprise plans)
 
 **Checkpoint**: ✅ Foundation ready - user story implementation can now begin
 
@@ -113,20 +113,21 @@ Note: US2, US3, US4 all depend on SubscriptionCarousel component existing (T007-
 
 ### Implementation for User Story 1
 
-- [ ] T008 [US1] Create src/components/SubscriptionCarousel.tsx component with Embla initialization (useEmblaCarousel hook with loop:true, duration:30, draggable:false initially)
-- [ ] T009 [US1] Implement Embla viewport structure in SubscriptionCarousel.tsx (ref={emblaRef}, overflow-hidden, flex container per data-model.md)
-- [ ] T010 [US1] Create slide rendering loop mapping over cards array with min-w-0 flex-[0_0_100%] classes for full-width slides
-- [ ] T011 [US1] Implement card content structure inside each slide (reuse existing SubscriptionPage layout: image, title, description, badge)
-- [ ] T012 [P] [US1] Add pricing toggle buttons (Monthly/Yearly) with billingCycle state management in SubscriptionCarousel.tsx
-- [ ] T013 [P] [US1] Implement price display logic showing monthlyPrice or yearlyPrice based on billingCycle state
-- [ ] T014 [P] [US1] Add features list using existing FeatureItem component from src/components/FeatureItem.tsx
-- [ ] T015 [P] [US1] Add CTA button with onCtaClick callback firing with cardId and billingCycle
-- [ ] T016 [US1] Create Previous button with ChevronLeft icon (Lucide React) calling emblaApi.scrollPrev() in SubscriptionCarousel.tsx
-- [ ] T017 [US1] Create Next button with ChevronRight icon calling emblaApi.scrollNext() in SubscriptionCarousel.tsx
-- [ ] T018 [US1] Style navigation buttons with absolute positioning (left-0, right-0, top-1/2, -translate-y-1/2) and touch-friendly size (w-11 h-11 md:w-12 md:h-12)
-- [ ] T019 [US1] Update src/pages/SubscriptionPage.tsx to import and render SubscriptionCarousel component with hardcoded cards array
+- [x] T008 [US1] Create src/components/SubscriptionCarousel.tsx component with Embla initialization (useEmblaCarousel hook with loop:true, duration:30, draggable:false initially)
+- [x] T009 [US1] Implement Embla viewport structure in SubscriptionCarousel.tsx (ref={emblaRef}, overflow-hidden, flex container per data-model.md)
+- [x] T010 [US1] Create slide rendering loop mapping over cards array with min-w-0 flex-[0_0_100%] classes for full-width slides
+- [x] T011 [US1] Implement card content structure inside each slide (reuse existing SubscriptionPage layout: image, title, description, badge)
+- [x] T012 [P] [US1] Add pricing toggle buttons (Monthly/Yearly) with billingCycle state management in SubscriptionCarousel.tsx
+- [x] T013 [P] [US1] Implement price display logic showing monthlyPrice or yearlyPrice based on billingCycle state
+- [x] T014 [P] [US1] Add features list using existing FeatureItem component from src/components/FeatureItem.tsx
+- [x] T015 [P] [US1] Add CTA button with onCtaClick callback firing with cardId and billingCycle
+- [x] T016 [US1] Create Previous button with ChevronLeft icon (Lucide React) calling emblaApi.scrollPrev() in SubscriptionCarousel.tsx
+- [x] T017 [US1] Create Next button with ChevronRight icon calling emblaApi.scrollNext() in SubscriptionCarousel.tsx
+- [x] T018 [US1] Style navigation buttons with absolute positioning (left-0, right-0, top-1/2, -translate-y-1/2) and touch-friendly size (w-11 h-11 md:w-12 md:h-12)
+- [x] T019 [US1] Update src/pages/SubscriptionPage.tsx to import and render SubscriptionCarousel component with hardcoded cards array
 
 **Manual Verification Checklist for US1**:
+
 - [ ] V001 Click Next button → Card 2 slides in from right
 - [ ] V002 Click Previous button → Card 1 slides in from left
 - [ ] V003 On last card, click Next → Wraps to first card smoothly
@@ -146,13 +147,14 @@ Note: US2, US3, US4 all depend on SubscriptionCarousel component existing (T007-
 
 ### Implementation for User Story 2
 
-- [ ] T020 [US2] Add selectedIndex state tracking in SubscriptionCarousel.tsx using useEffect with emblaApi.on('select') listener
-- [ ] T021 [US2] Create dot indicators rendering loop (Array.from({length: cards.length})) below carousel in SubscriptionCarousel.tsx
-- [ ] T022 [US2] Style dot buttons with w-2 h-2 rounded-full transition-colors, active dot bg-black, inactive bg-gray-300 hover:bg-gray-400
-- [ ] T023 [US2] Implement dot click handler calling emblaApi.scrollTo(index) for direct navigation to specific card
-- [ ] T024 [US2] Add ARIA labels to dots (aria-label="Go to slide N", aria-current="true" for active dot)
+- [x] T020 [US2] Add selectedIndex state tracking in SubscriptionCarousel.tsx using useEffect with emblaApi.on('select') listener
+- [x] T021 [US2] Create dot indicators rendering loop (Array.from({length: cards.length})) below carousel in SubscriptionCarousel.tsx
+- [x] T022 [US2] Style dot buttons with w-2 h-2 rounded-full transition-colors, active dot bg-black, inactive bg-gray-300 hover:bg-gray-400
+- [x] T023 [US2] Implement dot click handler calling emblaApi.scrollTo(index) for direct navigation to specific card
+- [x] T024 [US2] Add ARIA labels to dots (aria-label="Go to slide N", aria-current="true" for active dot)
 
 **Manual Verification Checklist for US2**:
+
 - [ ] V007 On card 1 → First dot is black (active)
 - [ ] V008 Navigate to card 2 → Second dot becomes active, first dot becomes gray
 - [ ] V009 Click dot #3 → Jump directly to card 3
@@ -170,12 +172,13 @@ Note: US2, US3, US4 all depend on SubscriptionCarousel component existing (T007-
 
 ### Implementation for User Story 3
 
-- [ ] T025 [US3] Update Embla configuration in SubscriptionCarousel.tsx to set draggable:true (enable touch/mouse drag)
-- [ ] T026 [US3] Add dragFree:false and containScroll:'trimSnaps' options to Embla config for snap-to-slide behavior
-- [ ] T027 [US3] Test swipe threshold (default 50px horizontal movement) triggers navigation on mobile device
-- [ ] T028 [US3] Verify incomplete swipes (< 50px) snap back to current card correctly
+- [x] T025 [US3] Update Embla configuration in SubscriptionCarousel.tsx to set draggable:true (enable touch/mouse drag)
+- [x] T026 [US3] Add dragFree:false and containScroll:'trimSnaps' options to Embla config for snap-to-slide behavior
+- [x] T027 [US3] Test swipe threshold (default 50px horizontal movement) triggers navigation on mobile device
+- [x] T028 [US3] Verify incomplete swipes (< 50px) snap back to current card correctly
 
 **Manual Verification Checklist for US3**:
+
 - [ ] V011 (Mobile) Swipe left on card → Next card slides in
 - [ ] V012 (Mobile) Swipe right on card → Previous card slides in
 - [ ] V013 (Mobile) Short swipe (< 50px) → Snaps back to current card
@@ -194,12 +197,13 @@ Note: US2, US3, US4 all depend on SubscriptionCarousel component existing (T007-
 
 ### Implementation for User Story 4
 
-- [ ] T029 [US4] Add tabIndex={0} to carousel container div in SubscriptionCarousel.tsx for keyboard focus
-- [ ] T030 [US4] Add role="region" and aria-label="Subscription plans carousel" to carousel container for accessibility
-- [ ] T031 [US4] Implement useEffect with keydown event listener on emblaRef.current checking for ArrowLeft/ArrowRight keys
-- [ ] T032 [US4] Call emblaApi.scrollPrev() on ArrowLeft, emblaApi.scrollNext() on ArrowRight in keyboard handler
+- [x] T029 [US4] Add tabIndex={0} to carousel container div in SubscriptionCarousel.tsx for keyboard focus
+- [x] T030 [US4] Add role="region" and aria-label="Subscription plans carousel" to carousel container for accessibility
+- [x] T031 [US4] Implement useEffect with keydown event listener on emblaRef.current checking for ArrowLeft/ArrowRight keys
+- [x] T032 [US4] Call emblaApi.scrollPrev() on ArrowLeft, emblaApi.scrollNext() on ArrowRight in keyboard handler
 
 **Manual Verification Checklist for US4**:
+
 - [ ] V016 Tab to carousel (focus visible)
 - [ ] V017 Press Right Arrow → Next card slides in
 - [ ] V018 Press Left Arrow → Previous card slides in
@@ -234,6 +238,7 @@ Note: US2, US3, US4 all depend on SubscriptionCarousel component existing (T007-
 - [ ] T042 Test mid-transition navigation (click Next during animation) - verify action queues, completes after current animation
 
 **Manual Verification Checklist for Polish**:
+
 - [ ] V021 Window resize during animation → Layout stays intact
 - [ ] V022 Empty cards array → Shows "No subscription plans available" message
 - [ ] V023 All cards have same height (or min-height prevents layout shift)
@@ -252,6 +257,7 @@ Note: US2, US3, US4 all depend on SubscriptionCarousel component existing (T007-
 ## Code Review Checklist (Constitutional Compliance)
 
 **Clean Code (Principle I)**:
+
 - [ ] Component names are descriptive (SubscriptionCarousel, not just Carousel)
 - [ ] Functions are small and single-responsibility (e.g., scrollPrev, scrollNext separate methods)
 - [ ] No code duplication (card layout reused, not copy-pasted)
@@ -260,6 +266,7 @@ Note: US2, US3, US4 all depend on SubscriptionCarousel component existing (T007-
 - [ ] Comments only explain "why" (Embla config options documented)
 
 **Simple UX (Principle II)**:
+
 - [ ] Navigation requires 1 click (no multi-step flows)
 - [ ] Familiar carousel pattern (buttons, dots, swipe all standard)
 - [ ] Immediate visual feedback on all actions (button hover, active dot)
@@ -267,6 +274,7 @@ Note: US2, US3, US4 all depend on SubscriptionCarousel component existing (T007-
 - [ ] No unnecessary features (no autoplay, no complex gestures)
 
 **Responsive Design (Principle III)**:
+
 - [ ] Mobile-first Tailwind classes (base styles, then md:, lg:)
 - [ ] Tested at 375px, 768px, 1440px breakpoints
 - [ ] Touch targets ≥ 44x44px (w-11 h-11 = 44px minimum)
@@ -274,6 +282,7 @@ Note: US2, US3, US4 all depend on SubscriptionCarousel component existing (T007-
 - [ ] Images scale appropriately (object-cover, rounded-lg)
 
 **Minimal Dependencies (Principle IV)**:
+
 - [ ] Only 1 new dependency added (embla-carousel-react ~13KB)
 - [ ] Embla is actively maintained (verified GitHub last commit < 1 week)
 - [ ] No heavy animation libraries (no Framer Motion, GSAP, etc.)
@@ -281,6 +290,7 @@ Note: US2, US3, US4 all depend on SubscriptionCarousel component existing (T007-
 - [ ] Reused existing components (FeatureItem, Button, Card)
 
 **Zero Testing (Principle V)**:
+
 - [ ] NO test files created (no .test.tsx, .spec.tsx files)
 - [ ] NO testing libraries installed (no @testing-library, jest, vitest)
 - [ ] Manual verification checklists completed (V001-V030)
@@ -292,6 +302,7 @@ Note: US2, US3, US4 all depend on SubscriptionCarousel component existing (T007-
 ## Commit Strategy
 
 ### Commit 1: Foundation
+
 ```bash
 git add src/types/subscription.ts public/clips-images/*
 git commit -m "feat: Add TypeScript types and character images for carousel
@@ -304,6 +315,7 @@ Task: T005, T006"
 ```
 
 ### Commit 2: Core Carousel (US1)
+
 ```bash
 git add src/components/SubscriptionCarousel.tsx src/pages/SubscriptionPage.tsx
 git commit -m "feat: Implement core carousel with button navigation (US1)
@@ -322,6 +334,7 @@ Verified: V001-V006"
 ```
 
 ### Commit 3: Dot Indicators (US2)
+
 ```bash
 git add src/components/SubscriptionCarousel.tsx
 git commit -m "feat: Add dot indicators for carousel position (US2)
@@ -337,6 +350,7 @@ Verified: V007-V010"
 ```
 
 ### Commit 4: Touch Gestures (US3)
+
 ```bash
 git add src/components/SubscriptionCarousel.tsx
 git commit -m "feat: Enable touch/swipe gestures for mobile (US3)
@@ -352,6 +366,7 @@ Verified: V011-V015"
 ```
 
 ### Commit 5: Keyboard Navigation (US4)
+
 ```bash
 git add src/components/SubscriptionCarousel.tsx
 git commit -m "feat: Add keyboard navigation with arrow keys (US4)
@@ -367,6 +382,7 @@ Verified: V016-V020"
 ```
 
 ### Commit 6: Polish & Verification
+
 ```bash
 git add src/components/SubscriptionCarousel.tsx
 git commit -m "polish: Responsive verification and performance optimization
@@ -396,6 +412,7 @@ Constitution: Clean Code ✅, Simple UX ✅, Responsive ✅, Minimal Deps ✅, Z
 **Dependencies Added**: 1 (embla-carousel-react ~13KB)
 
 **MVP Scope** (Minimum Viable Product):
+
 - Phase 1: Setup (T001-T004)
 - Phase 2: Foundational (T005-T007)
 - Phase 3: User Story 1 (T008-T019)
@@ -403,11 +420,13 @@ Constitution: Clean Code ✅, Simple UX ✅, Responsive ✅, Minimal Deps ✅, Z
 - **MVP Delivers**: Working carousel with button navigation, billing cycle persistence
 
 **Full Feature Scope** (All User Stories):
+
 - MVP + Phase 4-7: Adds dots, touch gestures, keyboard navigation, polish
 - **Total Tasks**: 42 tasks
 - **Delivers**: Complete carousel with all P1/P2/P3 features
 
 **Parallelization Opportunities**:
+
 - After T011 (SubscriptionCarousel exists): US2, US3, US4 can be developed in parallel
 - T012-T015 can be developed in parallel (different UI elements)
 - T033-T035 can be tested in parallel (different viewports)
