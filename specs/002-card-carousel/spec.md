@@ -5,7 +5,7 @@
 **Status**: Draft  
 **Input**: User description: "on click of this button i want to change the card to the next card available. add slider"
 
-## User Scenarios & Testing *(mandatory)*
+## User Scenarios & Testing _(mandatory)_
 
 ### User Story 1 - Navigate Between Cards (Priority: P1)
 
@@ -82,7 +82,7 @@ As a keyboard user, I want to use arrow keys to navigate between cards, so I can
 - What if card content has different heights? (Carousel container should adjust height smoothly or maintain fixed height)
 - What happens when user clicks Next while animation is still in progress? (Should prevent multiple simultaneous animations)
 
-## Requirements *(mandatory)*
+## Requirements _(mandatory)_
 
 ### Functional Requirements
 
@@ -101,9 +101,10 @@ As a keyboard user, I want to use arrow keys to navigate between cards, so I can
 - **FR-013**: System MUST persist the currently selected pricing plan (monthly/yearly) when navigating between cards
 - **FR-014**: System MUST be responsive at all breakpoints (375px mobile, 768px tablet, 1440px desktop)
 
-### Key Entities *(include if feature involves data)*
+### Key Entities _(include if feature involves data)_
 
 - **SubscriptionCard**: Represents a complete subscription offering with features list, pricing tiers, CTA button, and footer. Each card has:
+
   - Unique identifier (e.g., "basic", "premium", "enterprise")
   - Character image/avatar
   - List of features (array of strings)
@@ -117,7 +118,7 @@ As a keyboard user, I want to use arrow keys to navigate between cards, so I can
   - Animation state (idle, transitioning, direction)
   - Selected billing cycle (month/year) - shared across all cards
 
-## Success Criteria *(mandatory)*
+## Success Criteria _(mandatory)_
 
 ### Measurable Outcomes
 
@@ -146,7 +147,7 @@ As a keyboard user, I want to use arrow keys to navigate between cards, so I can
 ## Dependencies
 
 - **Existing**: React 19.2.0, Tailwind CSS 4.1.18, TypeScript 5.9.3, shadcn/ui components
-- **Optional**: 
+- **Optional**:
   - Swipe gesture library (P3) - consider `react-swipeable` (~3KB) or implement custom using touch events
   - Animation library (optional) - Framer Motion could be used but adds ~50KB (prefer CSS transforms per Minimal Dependencies principle)
 - **Constitution Compliance**: All dependencies must align with Minimal Dependencies principle - prefer native CSS/JS solutions over heavy libraries
