@@ -18,6 +18,7 @@ Implementation plan successfully generated for card carousel slider feature with
 **File**: [research.md](research.md) (305 lines)
 
 **Technical Decisions Documented**:
+
 1. ✅ **Carousel Library**: Embla Carousel React (~13KB, best-in-class)
 2. ✅ **Animation Strategy**: Embla native CSS transforms (no extra dependencies)
 3. ✅ **Touch Gestures**: Embla built-in draggable (no react-swipeable needed)
@@ -27,6 +28,7 @@ Implementation plan successfully generated for card carousel slider feature with
 7. ✅ **Keyboard Navigation**: Custom event listener using Embla methods
 
 **Alternatives Evaluated**:
+
 - Swiper (❌ too heavy: 50KB vs 13KB)
 - React Slick (❌ jQuery dependency, 55KB total)
 - Pure CSS implementation (❌ reinventing wheel, 200-300 LOC)
@@ -39,7 +41,9 @@ Implementation plan successfully generated for card carousel slider feature with
 ### Phase 1: Design & Contracts (✅ Complete)
 
 **Files Generated**:
+
 1. ✅ [data-model.md](data-model.md) (471 lines)
+
    - TypeScript interfaces (SubscriptionCard, BillingCycle, all component props)
    - Component architecture hierarchy (5 components)
    - Data flow diagrams
@@ -49,6 +53,7 @@ Implementation plan successfully generated for card carousel slider feature with
    - Edge case handling patterns
 
 2. ✅ [contracts/SubscriptionCarousel.md](contracts/SubscriptionCarousel.md) (424 lines)
+
    - Full component API specification
    - Props table with types, defaults, descriptions
    - Behavior specifications for all interactions
@@ -72,13 +77,13 @@ Implementation plan successfully generated for card carousel slider feature with
 
 ## Constitutional Compliance Re-Check
 
-| Principle              | Status | Post-Design Assessment                                                                    |
-| ---------------------- | ------ | ----------------------------------------------------------------------------------------- |
-| I. Clean Code          | ✅ PASS | Embla provides clean API. Single-responsibility components. Well-typed interfaces.         |
-| II. Simple UX          | ✅ PASS | Familiar carousel pattern. 1-click navigation. Intuitive touch/keyboard controls.          |
-| III. Responsive Design | ✅ PASS | Tailwind breakpoints (375px, 768px, 1440px). Touch targets ≥44x44px. Mobile-first.        |
-| IV. Minimal Dependencies | ✅ PASS | Only 1 new dependency (Embla 13KB). Actively maintained. Zero unnecessary libraries.     |
-| V. Zero Testing        | ✅ PASS | Manual verification checklist (40+ cases). No test files. Visual QA at 3 breakpoints.     |
+| Principle                | Status  | Post-Design Assessment                                                                |
+| ------------------------ | ------- | ------------------------------------------------------------------------------------- |
+| I. Clean Code            | ✅ PASS | Embla provides clean API. Single-responsibility components. Well-typed interfaces.    |
+| II. Simple UX            | ✅ PASS | Familiar carousel pattern. 1-click navigation. Intuitive touch/keyboard controls.     |
+| III. Responsive Design   | ✅ PASS | Tailwind breakpoints (375px, 768px, 1440px). Touch targets ≥44x44px. Mobile-first.    |
+| IV. Minimal Dependencies | ✅ PASS | Only 1 new dependency (Embla 13KB). Actively maintained. Zero unnecessary libraries.  |
+| V. Zero Testing          | ✅ PASS | Manual verification checklist (40+ cases). No test files. Visual QA at 3 breakpoints. |
 
 **GATE STATUS: ✅ ALL CHECKS PASSED - Ready for Task Breakdown**
 
@@ -86,17 +91,17 @@ Implementation plan successfully generated for card carousel slider feature with
 
 ## Technology Stack Finalized
 
-| Layer                  | Technology               | Bundle Impact | Status         |
-| ---------------------- | ------------------------ | ------------- | -------------- |
-| Carousel Engine        | Embla Carousel React     | +13KB gz      | ✅ Selected    |
-| Styling                | Tailwind CSS 4.1.18      | (existing)    | ✅ Configured  |
-| UI Components          | shadcn/ui (Button, Card) | (existing)    | ✅ Available   |
-| Icons                  | Lucide React             | (existing)    | ✅ Available   |
-| State Management       | React useState           | 0KB           | ✅ Native      |
-| Animation              | Embla native transforms  | 0KB           | ✅ Built-in    |
-| Touch Gestures         | Embla draggable          | 0KB           | ✅ Built-in    |
-| Keyboard Navigation    | Custom event listener    | <1KB          | ✅ Planned     |
-| Type Safety            | TypeScript 5.9.3         | (existing)    | ✅ Configured  |
+| Layer               | Technology               | Bundle Impact | Status        |
+| ------------------- | ------------------------ | ------------- | ------------- |
+| Carousel Engine     | Embla Carousel React     | +13KB gz      | ✅ Selected   |
+| Styling             | Tailwind CSS 4.1.18      | (existing)    | ✅ Configured |
+| UI Components       | shadcn/ui (Button, Card) | (existing)    | ✅ Available  |
+| Icons               | Lucide React             | (existing)    | ✅ Available  |
+| State Management    | React useState           | 0KB           | ✅ Native     |
+| Animation           | Embla native transforms  | 0KB           | ✅ Built-in   |
+| Touch Gestures      | Embla draggable          | 0KB           | ✅ Built-in   |
+| Keyboard Navigation | Custom event listener    | <1KB          | ✅ Planned    |
+| Type Safety         | TypeScript 5.9.3         | (existing)    | ✅ Configured |
 
 **Total Bundle Addition**: ~13KB gzipped (Embla only)  
 **Constitution Compliance**: ✅ Maintained
@@ -178,32 +183,35 @@ All 14 functional requirements mapped to implementation:
 
 ## Success Criteria Targets
 
-| Criterion | Target     | Implementation Strategy                         |
-| --------- | ---------- | ----------------------------------------------- |
-| SC-001    | <5s total  | Embla provides instant navigation               |
-| SC-002    | <500ms, 60fps | Embla duration: 30 (~400ms), GPU acceleration |
+| Criterion | Target        | Implementation Strategy                             |
+| --------- | ------------- | --------------------------------------------------- |
+| SC-001    | <5s total     | Embla provides instant navigation                   |
+| SC-002    | <500ms, 60fps | Embla duration: 30 (~400ms), GPU acceleration       |
 | SC-003    | 3 breakpoints | Tailwind responsive classes (px-4 md:px-8 lg:px-16) |
-| SC-004    | No delay   | useEffect with emblaApi.on('select') listener   |
-| SC-005    | 90%+ swipe | Embla draggable with containScroll: 'trimSnaps' |
-| SC-006    | <100ms kbd | Direct scrollPrev/Next call on keydown          |
-| SC-007    | No stuck   | Embla handles wrap-around and state internally  |
-| SC-008    | 90+ a11y   | ARIA labels, keyboard support, semantic HTML    |
-| SC-009    | No glitches | Embla queues rapid actions automatically        |
-| SC-010    | Persists   | Single billingCycle state in parent component   |
+| SC-004    | No delay      | useEffect with emblaApi.on('select') listener       |
+| SC-005    | 90%+ swipe    | Embla draggable with containScroll: 'trimSnaps'     |
+| SC-006    | <100ms kbd    | Direct scrollPrev/Next call on keydown              |
+| SC-007    | No stuck      | Embla handles wrap-around and state internally      |
+| SC-008    | 90+ a11y      | ARIA labels, keyboard support, semantic HTML        |
+| SC-009    | No glitches   | Embla queues rapid actions automatically            |
+| SC-010    | Persists      | Single billingCycle state in parent component       |
 
 ---
 
 ## Known Limitations & Trade-offs
 
 1. **Hardcoded Card Data**: Initial implementation uses static array (no API integration)
+
    - Justification: Spec assumption A-001, simplifies MVP
    - Future: Can refactor to accept data from API/CMS
 
 2. **No Autoplay**: Carousel only advances on user interaction
+
    - Justification: Spec out-of-scope, better UX for pricing comparison
    - Future: Could add as optional prop with constitutional review
 
 3. **Single Carousel Per Page**: No multi-carousel support
+
    - Justification: Current requirement is subscription page only
    - Future: Component is reusable, can instantiate multiple times
 
@@ -215,13 +223,13 @@ All 14 functional requirements mapped to implementation:
 
 ## Risk Mitigation Completed
 
-| Risk                     | Mitigation Strategy                                      | Status     |
-| ------------------------ | -------------------------------------------------------- | ---------- |
-| Embla learning curve     | Comprehensive quickstart with code samples               | ✅ Documented |
-| Animation performance    | GPU acceleration via Embla, performance checklist        | ✅ Addressed |
-| Touch gesture conflicts  | Embla containScroll option, mobile testing checklist     | ✅ Addressed |
-| Rapid click issues       | Embla internal debouncing, edge case testing             | ✅ Addressed |
-| Accessibility gaps       | ARIA labels, keyboard support, Lighthouse checklist      | ✅ Addressed |
+| Risk                    | Mitigation Strategy                                  | Status        |
+| ----------------------- | ---------------------------------------------------- | ------------- |
+| Embla learning curve    | Comprehensive quickstart with code samples           | ✅ Documented |
+| Animation performance   | GPU acceleration via Embla, performance checklist    | ✅ Addressed  |
+| Touch gesture conflicts | Embla containScroll option, mobile testing checklist | ✅ Addressed  |
+| Rapid click issues      | Embla internal debouncing, edge case testing         | ✅ Addressed  |
+| Accessibility gaps      | ARIA labels, keyboard support, Lighthouse checklist  | ✅ Addressed  |
 
 ---
 
@@ -230,6 +238,7 @@ All 14 functional requirements mapped to implementation:
 **File**: `.github/agents/copilot-instructions.md`
 
 **Changes Applied**:
+
 - ✅ Added language: TypeScript 5.9.3, React 19.2.0
 - ✅ Added framework: Embla Carousel React (best carousel library), Tailwind CSS 4.1.18, shadcn/ui components
 - ✅ Added database: N/A (hardcoded card data in component)
@@ -244,6 +253,7 @@ GitHub Copilot is now aware of Embla Carousel for future code suggestions.
 ### Immediate: Run `/speckit.tasks`
 
 Generate detailed task breakdown from this plan:
+
 ```bash
 # Expected output: tasks.md with 40-50 tasks across 7 phases
 # - Phase 1: Setup (install Embla, verify images)
@@ -258,6 +268,7 @@ Generate detailed task breakdown from this plan:
 ### After Tasks: Run `/speckit.implement`
 
 Execute implementation following tasks.md:
+
 ```bash
 # Expected:
 # - Install embla-carousel-react
@@ -271,6 +282,7 @@ Execute implementation following tasks.md:
 ### Final: Create Pull Request
 
 Merge to main after manual verification complete:
+
 ```bash
 # PR title: "feat: Add card carousel slider for subscription plans"
 # PR body: Link to spec.md, list features (P1/P2/P3), constitutional compliance
@@ -287,19 +299,19 @@ Merge to main after manual verification complete:
 **Requirements Mapped**: 14/14 (100% coverage)  
 **Success Criteria Defined**: 10 measurable targets  
 **Test Cases Planned**: 40+ manual verification cases  
-**Constitution Compliance**: 5/5 principles maintained  
+**Constitution Compliance**: 5/5 principles maintained
 
 ---
 
 ## Specification Quality Score
 
-| Category                  | Score | Notes                                                  |
-| ------------------------- | ----- | ------------------------------------------------------ |
-| Completeness              | 10/10 | All sections filled, no "NEEDS CLARIFICATION" markers  |
-| Technical Depth           | 10/10 | Detailed architecture, data flow, edge cases           |
-| Implementation Readiness  | 10/10 | Quickstart guide with code samples, step-by-step       |
-| Constitutional Compliance | 5/5   | All principles verified twice (pre/post design)        |
-| Risk Assessment           | 5/5   | All risks identified with mitigation strategies        |
+| Category                  | Score | Notes                                                 |
+| ------------------------- | ----- | ----------------------------------------------------- |
+| Completeness              | 10/10 | All sections filled, no "NEEDS CLARIFICATION" markers |
+| Technical Depth           | 10/10 | Detailed architecture, data flow, edge cases          |
+| Implementation Readiness  | 10/10 | Quickstart guide with code samples, step-by-step      |
+| Constitutional Compliance | 5/5   | All principles verified twice (pre/post design)       |
+| Risk Assessment           | 5/5   | All risks identified with mitigation strategies       |
 
 **Total Score**: 40/40 (100%) - ✅ PLANNING PHASE COMPLETE
 

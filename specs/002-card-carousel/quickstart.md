@@ -22,6 +22,7 @@ This guide provides step-by-step instructions to implement a subscription card c
 - Git repository with branch `002-card-carousel` checked out
 
 **Verify Prerequisites**:
+
 ```bash
 node --version  # Should be 23.8.0+
 npm --version   # Should be 10.9.2+
@@ -39,11 +40,13 @@ npm install embla-carousel-react
 ```
 
 **Expected output**:
+
 ```
 added 1 package, and audited X packages in Ys
 ```
 
 **Verify installation**:
+
 ```bash
 npm list embla-carousel-react
 # Should show: embla-carousel-react@8.x.x
@@ -71,6 +74,7 @@ tree src -L 1
 ```
 
 **Expected structure**:
+
 ```
 src/
 ├── components/
@@ -94,37 +98,38 @@ Create `src/types/subscription.ts`:
  * Represents a single subscription plan card
  */
 export interface SubscriptionCard {
-  id: string
-  title: string
-  description?: string
-  characterImage: string
-  characterImageAlt: string
-  features: string[]
-  monthlyPrice: number
-  yearlyPrice: number
-  ctaText: string
-  badge?: string
+  id: string;
+  title: string;
+  description?: string;
+  characterImage: string;
+  characterImageAlt: string;
+  features: string[];
+  monthlyPrice: number;
+  yearlyPrice: number;
+  ctaText: string;
+  badge?: string;
 }
 
 /**
  * Billing cycle options
  */
-export type BillingCycle = 'month' | 'year'
+export type BillingCycle = "month" | "year";
 
 /**
  * Props for SubscriptionCarousel component
  */
 export interface SubscriptionCarouselProps {
-  cards: SubscriptionCard[]
-  initialBillingCycle?: BillingCycle
-  onCtaClick?: (cardId: string, billingCycle: BillingCycle) => void
-  showDots?: boolean
-  enableSwipe?: boolean
-  enableKeyboard?: boolean
+  cards: SubscriptionCard[];
+  initialBillingCycle?: BillingCycle;
+  onCtaClick?: (cardId: string, billingCycle: BillingCycle) => void;
+  showDots?: boolean;
+  enableSwipe?: boolean;
+  enableKeyboard?: boolean;
 }
 ```
 
 **Verify**: TypeScript should compile without errors:
+
 ```bash
 npm run dev
 # Check terminal for TypeScript errors
@@ -139,62 +144,62 @@ npm run dev
 At the top of `src/components/SubscriptionCarousel.tsx` (will create next):
 
 ```typescript
-import type { SubscriptionCard } from '@/types/subscription'
+import type { SubscriptionCard } from "@/types/subscription";
 
 const SUBSCRIPTION_CARDS: SubscriptionCard[] = [
   {
-    id: 'basic',
-    title: 'Basic Plan',
-    description: 'Perfect for individuals',
-    characterImage: '/clips-images/character-basic.png',
-    characterImageAlt: 'Basic plan character illustration',
+    id: "basic",
+    title: "Basic Plan",
+    description: "Perfect for individuals",
+    characterImage: "/clips-images/character-basic.png",
+    characterImageAlt: "Basic plan character illustration",
     features: [
-      'Access to core features',
-      'Email support',
-      '5 GB storage',
-      'Basic analytics',
+      "Access to core features",
+      "Email support",
+      "5 GB storage",
+      "Basic analytics",
     ],
     monthlyPrice: 9.99,
-    yearlyPrice: 99.00,
-    ctaText: 'Start Free Trial',
+    yearlyPrice: 99.0,
+    ctaText: "Start Free Trial",
   },
   {
-    id: 'premium',
-    title: 'Premium Plan',
-    description: 'Most Popular',
-    characterImage: '/clips-images/character-premium.png',
-    characterImageAlt: 'Premium plan character illustration',
+    id: "premium",
+    title: "Premium Plan",
+    description: "Most Popular",
+    characterImage: "/clips-images/character-premium.png",
+    characterImageAlt: "Premium plan character illustration",
     features: [
-      'All Basic features',
-      'Priority support',
-      '50 GB storage',
-      'Advanced analytics',
-      'Custom integrations',
+      "All Basic features",
+      "Priority support",
+      "50 GB storage",
+      "Advanced analytics",
+      "Custom integrations",
     ],
     monthlyPrice: 19.99,
-    yearlyPrice: 199.00,
-    ctaText: 'Get Started',
-    badge: '50% OFF',
+    yearlyPrice: 199.0,
+    ctaText: "Get Started",
+    badge: "50% OFF",
   },
   {
-    id: 'enterprise',
-    title: 'Enterprise Plan',
-    description: 'For large teams',
-    characterImage: '/clips-images/character-enterprise.png',
-    characterImageAlt: 'Enterprise plan character illustration',
+    id: "enterprise",
+    title: "Enterprise Plan",
+    description: "For large teams",
+    characterImage: "/clips-images/character-enterprise.png",
+    characterImageAlt: "Enterprise plan character illustration",
     features: [
-      'All Premium features',
-      '24/7 phone support',
-      'Unlimited storage',
-      'Custom analytics',
-      'Dedicated account manager',
-      'SLA guarantee',
+      "All Premium features",
+      "24/7 phone support",
+      "Unlimited storage",
+      "Custom analytics",
+      "Dedicated account manager",
+      "SLA guarantee",
     ],
     monthlyPrice: 49.99,
-    yearlyPrice: 499.00,
-    ctaText: 'Contact Sales',
+    yearlyPrice: 499.0,
+    ctaText: "Contact Sales",
   },
-]
+];
 ```
 
 ---
@@ -206,85 +211,92 @@ const SUBSCRIPTION_CARDS: SubscriptionCard[] = [
 Create `src/components/SubscriptionCarousel.tsx`:
 
 ```typescript
-'use client'
+"use client";
 
-import { useState, useEffect, useCallback } from 'react'
-import useEmblaCarousel from 'embla-carousel-react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
-import { FeatureItem } from '@/components/FeatureItem'
-import { cn } from '@/lib/utils'
-import type { SubscriptionCarouselProps, BillingCycle } from '@/types/subscription'
+import { useState, useEffect, useCallback } from "react";
+import useEmblaCarousel from "embla-carousel-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { FeatureItem } from "@/components/FeatureItem";
+import { cn } from "@/lib/utils";
+import type {
+  SubscriptionCarouselProps,
+  BillingCycle,
+} from "@/types/subscription";
 
 export function SubscriptionCarousel({
   cards,
-  initialBillingCycle = 'month',
+  initialBillingCycle = "month",
   onCtaClick,
   showDots = true,
   enableSwipe = true,
   enableKeyboard = true,
 }: SubscriptionCarouselProps) {
-  const [billingCycle, setBillingCycle] = useState<BillingCycle>(initialBillingCycle)
-  const [selectedIndex, setSelectedIndex] = useState(0)
-  
+  const [billingCycle, setBillingCycle] =
+    useState<BillingCycle>(initialBillingCycle);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: cards.length > 1,
     duration: 30,
     draggable: enableSwipe,
-    align: 'center',
+    align: "center",
     dragFree: false,
-    containScroll: 'trimSnaps',
+    containScroll: "trimSnaps",
     slidesToScroll: 1,
-  })
+  });
 
-  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi])
-  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi])
-  const scrollTo = useCallback((index: number) => emblaApi?.scrollTo(index), [emblaApi])
+  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+  const scrollTo = useCallback(
+    (index: number) => emblaApi?.scrollTo(index),
+    [emblaApi]
+  );
 
   useEffect(() => {
-    if (!emblaApi) return
+    if (!emblaApi) return;
 
     const onSelect = () => {
-      setSelectedIndex(emblaApi.selectedScrollSnap())
-    }
+      setSelectedIndex(emblaApi.selectedScrollSnap());
+    };
 
-    emblaApi.on('select', onSelect)
-    onSelect()
+    emblaApi.on("select", onSelect);
+    onSelect();
 
     return () => {
-      emblaApi.off('select', onSelect)
-    }
-  }, [emblaApi])
+      emblaApi.off("select", onSelect);
+    };
+  }, [emblaApi]);
 
   useEffect(() => {
-    if (!emblaApi || !enableKeyboard) return
+    if (!emblaApi || !enableKeyboard) return;
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'ArrowLeft') {
-        scrollPrev()
-      } else if (event.key === 'ArrowRight') {
-        scrollNext()
+      if (event.key === "ArrowLeft") {
+        scrollPrev();
+      } else if (event.key === "ArrowRight") {
+        scrollNext();
       }
-    }
+    };
 
-    const container = emblaRef.current
-    container?.addEventListener('keydown', handleKeyDown)
+    const container = emblaRef.current;
+    container?.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      container?.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [emblaApi, enableKeyboard, scrollPrev, scrollNext, emblaRef])
+      container?.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [emblaApi, enableKeyboard, scrollPrev, scrollNext, emblaRef]);
 
   if (cards.length === 0) {
     return (
       <div className="flex items-center justify-center min-h-[400px] text-gray-500">
         No subscription plans available
       </div>
-    )
+    );
   }
 
-  const showNavigation = cards.length > 1
+  const showNavigation = cards.length > 1;
 
   return (
     <div className="w-full px-4 md:px-8 lg:px-16 py-8">
@@ -314,7 +326,9 @@ export function SubscriptionCarousel({
                   <div className="text-center mb-4">
                     <h2 className="text-2xl font-bold">{card.title}</h2>
                     {card.description && (
-                      <p className="text-sm text-gray-600 mt-1">{card.description}</p>
+                      <p className="text-sm text-gray-600 mt-1">
+                        {card.description}
+                      </p>
                     )}
                     {card.badge && (
                       <span className="inline-block bg-black text-white text-xs px-2 py-1 rounded mt-2">
@@ -326,15 +340,15 @@ export function SubscriptionCarousel({
                   {/* Pricing Toggle */}
                   <div className="flex gap-2 mb-6">
                     <Button
-                      variant={billingCycle === 'month' ? 'default' : 'outline'}
-                      onClick={() => setBillingCycle('month')}
+                      variant={billingCycle === "month" ? "default" : "outline"}
+                      onClick={() => setBillingCycle("month")}
                       className="flex-1"
                     >
                       Monthly
                     </Button>
                     <Button
-                      variant={billingCycle === 'year' ? 'default' : 'outline'}
-                      onClick={() => setBillingCycle('year')}
+                      variant={billingCycle === "year" ? "default" : "outline"}
+                      onClick={() => setBillingCycle("year")}
                       className="flex-1"
                     >
                       Yearly
@@ -344,9 +358,12 @@ export function SubscriptionCarousel({
                   {/* Price Display */}
                   <div className="text-center mb-6">
                     <div className="text-3xl font-bold">
-                      ${billingCycle === 'month' ? card.monthlyPrice : card.yearlyPrice}
+                      $
+                      {billingCycle === "month"
+                        ? card.monthlyPrice
+                        : card.yearlyPrice}
                     </div>
-                    {billingCycle === 'year' && (
+                    {billingCycle === "year" && (
                       <div className="text-sm text-gray-600">
                         ${(card.yearlyPrice / 12).toFixed(2)}/month
                       </div>
@@ -405,22 +422,25 @@ export function SubscriptionCarousel({
                 key={index}
                 onClick={() => scrollTo(index)}
                 className={cn(
-                  'w-2 h-2 rounded-full transition-colors duration-300',
-                  index === selectedIndex ? 'bg-black' : 'bg-gray-300 hover:bg-gray-400'
+                  "w-2 h-2 rounded-full transition-colors duration-300",
+                  index === selectedIndex
+                    ? "bg-black"
+                    : "bg-gray-300 hover:bg-gray-400"
                 )}
                 aria-label={`Go to subscription plan ${index + 1}`}
-                aria-current={index === selectedIndex ? 'true' : 'false'}
+                aria-current={index === selectedIndex ? "true" : "false"}
               />
             ))}
           </div>
         )}
       </div>
     </div>
-  )
+  );
 }
 ```
 
 **Verify**: Dev server should compile without errors:
+
 ```bash
 # Check terminal for compilation errors
 ```
@@ -434,19 +454,19 @@ export function SubscriptionCarousel({
 Update `src/pages/SubscriptionPage.tsx`:
 
 ```typescript
-import { SubscriptionCarousel } from '@/components/SubscriptionCarousel'
-import type { SubscriptionCard } from '@/types/subscription'
+import { SubscriptionCarousel } from "@/components/SubscriptionCarousel";
+import type { SubscriptionCard } from "@/types/subscription";
 
 // Define card data (or import from SubscriptionCarousel if exported)
 const subscriptionCards: SubscriptionCard[] = [
   // ... (same as SUBSCRIPTION_CARDS from Step 5)
-]
+];
 
 export default function SubscriptionPage() {
-  const handleCtaClick = (cardId: string, billingCycle: 'month' | 'year') => {
-    console.log(`User selected ${cardId} with ${billingCycle} billing`)
+  const handleCtaClick = (cardId: string, billingCycle: "month" | "year") => {
+    console.log(`User selected ${cardId} with ${billingCycle} billing`);
     // TODO: Add checkout flow, analytics, etc.
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -459,7 +479,7 @@ export default function SubscriptionPage() {
         enableKeyboard={true}
       />
     </div>
-  )
+  );
 }
 ```
 
@@ -470,6 +490,7 @@ export default function SubscriptionPage() {
 ### Step 8: Test Functional Requirements
 
 **Start dev server**:
+
 ```bash
 npm run dev
 ```
@@ -479,6 +500,7 @@ npm run dev
 **Test Checklist**:
 
 **Navigation (P1 - Core)**:
+
 - [ ] Click Next button → Slide to next card
 - [ ] Click Previous button → Slide to previous card
 - [ ] Last card → Next → Wraps to first card
@@ -487,81 +509,101 @@ npm run dev
 - [ ] Animation completes in <500ms
 
 **Dot Indicators (P2)**:
+
 - [ ] Dots render below carousel
 - [ ] Active dot is black, inactive gray
 - [ ] Click dot #2 → Jump to card 2
 - [ ] Dot updates after navigation
 
 **Touch Gestures (P3)**:
+
 - [ ] (Mobile device) Swipe left → Next card
 - [ ] (Mobile device) Swipe right → Previous card
 - [ ] (Desktop) Mouse drag left → Next card
 
 **Keyboard Navigation (P3)**:
+
 - [ ] Click carousel to focus
 - [ ] Press Right Arrow → Next card
 - [ ] Press Left Arrow → Previous card
 
 **Billing Cycle**:
+
 - [ ] Click "Monthly" → Shows monthly price
 - [ ] Click "Yearly" → Shows yearly price + monthly breakdown
 - [ ] Navigate to next card → Billing cycle persists
 
 **CTA Button**:
+
 - [ ] Click "Start Free Trial" → Console logs correct cardId and billingCycle
 
 ### Step 9: Test Responsive Breakpoints
 
 **Mobile (375px)**:
+
 ```bash
 # In Chrome DevTools, toggle device toolbar (Cmd+Shift+M)
 # Set device to iPhone SE (375px width)
 ```
+
 - [ ] Full-width cards
 - [ ] Navigation buttons visible (44x44px minimum)
 - [ ] Touch swipe works smoothly
 
 **Tablet (768px)**:
+
 ```bash
 # Set device to iPad (768px width)
 ```
+
 - [ ] Moderate padding
 - [ ] Navigation buttons larger (48x48px)
 
 **Desktop (1440px)**:
+
 ```bash
 # Set viewport to 1440px width
 ```
+
 - [ ] Max-width container centered (max-w-2xl)
 - [ ] Navigation buttons on card edges
 
 ### Step 10: Test Edge Cases
 
 **Single Card**:
+
 ```typescript
 // Temporarily modify cards array to have 1 card
 const subscriptionCards: SubscriptionCard[] = [
-  { /* only one card */ }
-]
+  {
+    /* only one card */
+  },
+];
 ```
+
 - [ ] Navigation buttons hidden
 - [ ] Dot indicators hidden
 
 **Rapid Clicking**:
+
 - [ ] Click Next button 5 times rapidly → No visual glitches
 
 **Mid-Transition Click**:
+
 - [ ] Click Next → Immediately click Next again → Queues action smoothly
 
 **Empty Cards**:
+
 ```typescript
-const subscriptionCards: SubscriptionCard[] = []
+const subscriptionCards: SubscriptionCard[] = [];
 ```
+
 - [ ] Shows "No subscription plans available" message
 
 ### Step 11: Performance Verification
 
 **Animation Performance**:
+
 1. Open Chrome DevTools → Performance tab
 2. Start recording
 3. Navigate between cards 5 times
@@ -569,6 +611,7 @@ const subscriptionCards: SubscriptionCard[] = []
 5. Check FPS graph → Should maintain 60fps
 
 **Lighthouse Audit**:
+
 1. Open Chrome DevTools → Lighthouse tab
 2. Select "Accessibility" category
 3. Run audit
@@ -581,11 +624,13 @@ const subscriptionCards: SubscriptionCard[] = []
 ### Step 12: Review and Commit
 
 **Check git status**:
+
 ```bash
 git status
 ```
 
 **Expected changes**:
+
 ```
 modified:   package.json
 modified:   package-lock.json
@@ -595,6 +640,7 @@ modified:   src/pages/SubscriptionPage.tsx
 ```
 
 **Commit implementation**:
+
 ```bash
 git add src/types/subscription.ts
 git add src/components/SubscriptionCarousel.tsx
@@ -628,6 +674,7 @@ Constitution compliance: Clean Code ✅, Simple UX ✅, Responsive ✅, Minimal 
 **Symptoms**: Cards don't slide, instant jump to next card
 
 **Solution**:
+
 1. Check Embla options: `duration: 30` should be set
 2. Verify `overflow-hidden` class on viewport div
 3. Ensure slides have `min-w-0 flex-[0_0_100%]` classes
@@ -637,6 +684,7 @@ Constitution compliance: Clean Code ✅, Simple UX ✅, Responsive ✅, Minimal 
 **Symptoms**: Swipe has no effect
 
 **Solution**:
+
 1. Verify `draggable: true` in Embla options
 2. Check `enableSwipe` prop is true
 3. Test on actual touch device (not just Chrome DevTools)
@@ -646,6 +694,7 @@ Constitution compliance: Clean Code ✅, Simple UX ✅, Responsive ✅, Minimal 
 **Symptoms**: Arrow keys don't navigate
 
 **Solution**:
+
 1. Ensure `tabIndex={0}` on carousel container
 2. Click carousel to focus before pressing arrows
 3. Verify `enableKeyboard` prop is true
@@ -655,6 +704,7 @@ Constitution compliance: Clean Code ✅, Simple UX ✅, Responsive ✅, Minimal 
 **Symptoms**: Active dot doesn't change on navigation
 
 **Solution**:
+
 1. Check `emblaApi.on('select', onSelect)` event listener
 2. Verify `selectedIndex` state updates in useEffect
 3. Ensure `emblaApi` is not undefined
@@ -664,6 +714,7 @@ Constitution compliance: Clean Code ✅, Simple UX ✅, Responsive ✅, Minimal 
 **Symptoms**: Cannot find module '@/types/subscription'
 
 **Solution**:
+
 1. Check `tsconfig.json` has path alias: `"@/*": ["./src/*"]`
 2. Restart TypeScript server: Cmd+Shift+P → "TypeScript: Restart TS Server"
 

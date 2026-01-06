@@ -17,62 +17,62 @@
  */
 export interface SubscriptionCard {
   /** Unique identifier for the subscription plan (e.g., "basic", "premium", "enterprise") */
-  id: string
-  
+  id: string;
+
   /** Display title of the subscription plan */
-  title: string
-  
+  title: string;
+
   /** Optional description or tagline (e.g., "Most Popular", "Best Value") */
-  description?: string
-  
+  description?: string;
+
   /** Path to character image in /public/clips-images/ */
-  characterImage: string
-  
+  characterImage: string;
+
   /** Alt text for character image (accessibility) */
-  characterImageAlt: string
-  
+  characterImageAlt: string;
+
   /** Array of feature descriptions shown in the card */
-  features: string[]
-  
+  features: string[];
+
   /** Monthly price in USD */
-  monthlyPrice: number
-  
+  monthlyPrice: number;
+
   /** Yearly price in USD (for annual billing) */
-  yearlyPrice: number
-  
+  yearlyPrice: number;
+
   /** Call-to-action button text (e.g., "Start Free Trial", "Get Started") */
-  ctaText: string
-  
+  ctaText: string;
+
   /** Optional badge text (e.g., "50% OFF", "NEW") */
-  badge?: string
+  badge?: string;
 }
 
 /**
  * Billing cycle options for subscription pricing
  */
-export type BillingCycle = 'month' | 'year'
+export type BillingCycle = "month" | "year";
 
 /**
  * Props for the main SubscriptionCarousel component
  */
 export interface SubscriptionCarouselProps {
   /** Array of subscription cards to display in carousel */
-  cards: SubscriptionCard[]
-  
+  cards: SubscriptionCard[];
+
   /** Initial billing cycle (default: 'month') */
-  initialBillingCycle?: BillingCycle
-  
+  initialBillingCycle?: BillingCycle;
+
   /** Callback when user clicks CTA button */
-  onCtaClick?: (cardId: string, billingCycle: BillingCycle) => void
-  
+  onCtaClick?: (cardId: string, billingCycle: BillingCycle) => void;
+
   /** Whether to show dot indicators (default: true) */
-  showDots?: boolean
-  
+  showDots?: boolean;
+
   /** Whether to enable touch/swipe gestures (default: true) */
-  enableSwipe?: boolean
-  
+  enableSwipe?: boolean;
+
   /** Whether to enable keyboard navigation (default: true) */
-  enableKeyboard?: boolean
+  enableKeyboard?: boolean;
 }
 
 /**
@@ -80,16 +80,16 @@ export interface SubscriptionCarouselProps {
  */
 export interface SubscriptionCardComponentProps {
   /** Subscription card data */
-  card: SubscriptionCard
-  
+  card: SubscriptionCard;
+
   /** Current billing cycle (month or year) */
-  billingCycle: BillingCycle
-  
+  billingCycle: BillingCycle;
+
   /** Callback to change billing cycle */
-  onBillingCycleChange: (cycle: BillingCycle) => void
-  
+  onBillingCycleChange: (cycle: BillingCycle) => void;
+
   /** Callback when CTA button clicked */
-  onCtaClick: () => void
+  onCtaClick: () => void;
 }
 
 /**
@@ -97,13 +97,13 @@ export interface SubscriptionCardComponentProps {
  */
 export interface CarouselNavigationProps {
   /** Embla API instance for programmatic control */
-  emblaApi: EmblaCarouselType | undefined
-  
+  emblaApi: EmblaCarouselType | undefined;
+
   /** Whether previous button should be visible (default: true) */
-  showPrevButton?: boolean
-  
+  showPrevButton?: boolean;
+
   /** Whether next button should be visible (default: true) */
-  showNextButton?: boolean
+  showNextButton?: boolean;
 }
 
 /**
@@ -111,10 +111,10 @@ export interface CarouselNavigationProps {
  */
 export interface CarouselDotsProps {
   /** Embla API instance for programmatic control */
-  emblaApi: EmblaCarouselType | undefined
-  
+  emblaApi: EmblaCarouselType | undefined;
+
   /** Total number of slides */
-  slideCount: number
+  slideCount: number;
 }
 ```
 
@@ -150,15 +150,15 @@ export interface CarouselDotsProps {
 
 ### Component Responsibilities
 
-| Component                     | Responsibility                                                                 | State Managed                   |
-| ----------------------------- | ------------------------------------------------------------------------------ | ------------------------------- |
-| `SubscriptionCarousel`        | Top-level container, Embla initialization, keyboard events, billing cycle state | `billingCycle`, `emblaApi`      |
-| `SubscriptionCardSlide`       | Wrapper for individual slide (min-w-0 flex-[0_0_100%] for full-width)         | None (presentational)           |
-| `SubscriptionCardContent`     | Card content layout (reuses existing SubscriptionPage structure)               | None (receives props)           |
-| `PricingToggle`               | Monthly/Yearly toggle buttons                                                  | None (controlled by parent)     |
-| `CarouselNavigation`          | Previous/Next navigation buttons with click handlers                           | None (calls Embla API methods)  |
-| `CarouselDots`                | Dot indicators with click-to-navigate functionality                            | `selectedIndex` (from Embla)    |
-| `FeatureItem`                 | Feature list item with check icon (existing, reused)                           | None (presentational)           |
+| Component                 | Responsibility                                                                  | State Managed                  |
+| ------------------------- | ------------------------------------------------------------------------------- | ------------------------------ |
+| `SubscriptionCarousel`    | Top-level container, Embla initialization, keyboard events, billing cycle state | `billingCycle`, `emblaApi`     |
+| `SubscriptionCardSlide`   | Wrapper for individual slide (min-w-0 flex-[0_0_100%] for full-width)           | None (presentational)          |
+| `SubscriptionCardContent` | Card content layout (reuses existing SubscriptionPage structure)                | None (receives props)          |
+| `PricingToggle`           | Monthly/Yearly toggle buttons                                                   | None (controlled by parent)    |
+| `CarouselNavigation`      | Previous/Next navigation buttons with click handlers                            | None (calls Embla API methods) |
+| `CarouselDots`            | Dot indicators with click-to-navigate functionality                             | `selectedIndex` (from Embla)   |
+| `FeatureItem`             | Feature list item with check icon (existing, reused)                            | None (presentational)          |
 
 ---
 
@@ -168,13 +168,13 @@ export interface CarouselDotsProps {
 
 ```typescript
 // SubscriptionCarousel component state
-const [billingCycle, setBillingCycle] = useState<BillingCycle>('month')
+const [billingCycle, setBillingCycle] = useState<BillingCycle>("month");
 const [emblaRef, emblaApi] = useEmblaCarousel({
-  loop: true,           // Wrap-around navigation
-  duration: 30,         // Animation duration
-  draggable: true,      // Enable touch/swipe
-  align: 'center',      // Center-align slides
-})
+  loop: true, // Wrap-around navigation
+  duration: 30, // Animation duration
+  draggable: true, // Enable touch/swipe
+  align: "center", // Center-align slides
+});
 ```
 
 ### Data Flow Diagram
@@ -216,15 +216,15 @@ Click Dot #2 ──────────> CarouselDots ───────�
 ### Tailwind CSS Classes
 
 **Carousel Container**:
+
 ```tsx
 <div className="w-full px-4 md:px-8 lg:px-16 py-8">
-  <div className="max-w-2xl mx-auto relative">
-    {/* Embla viewport */}
-  </div>
+  <div className="max-w-2xl mx-auto relative">{/* Embla viewport */}</div>
 </div>
 ```
 
 **Embla Viewport** (required by Embla):
+
 ```tsx
 <div ref={emblaRef} className="overflow-hidden">
   {/* Embla container */}
@@ -232,20 +232,19 @@ Click Dot #2 ──────────> CarouselDots ───────�
 ```
 
 **Embla Container** (horizontal scroll):
+
 ```tsx
-<div className="flex">
-  {/* Slides */}
-</div>
+<div className="flex">{/* Slides */}</div>
 ```
 
 **Individual Slide** (full-width, no shrink):
+
 ```tsx
-<div className="min-w-0 flex-[0_0_100%]">
-  {/* Card content */}
-</div>
+<div className="min-w-0 flex-[0_0_100%]">{/* Card content */}</div>
 ```
 
 **Navigation Buttons**:
+
 ```tsx
 // Previous button (absolute positioned)
 <Button
@@ -269,6 +268,7 @@ Click Dot #2 ──────────> CarouselDots ───────�
 ```
 
 **Dot Indicators**:
+
 ```tsx
 <div className="flex gap-2 justify-center mt-6">
   <button
@@ -283,6 +283,7 @@ Click Dot #2 ──────────> CarouselDots ───────�
 ```
 
 **Responsive Adjustments**:
+
 - **Mobile (375px)**: Smaller buttons (w-11 h-11), tighter padding (px-4)
 - **Tablet (768px)**: Medium buttons (w-12 h-12), moderate padding (px-8)
 - **Desktop (1440px)**: Same as tablet, max-width container (max-w-2xl)
@@ -295,15 +296,15 @@ Click Dot #2 ──────────> CarouselDots ───────�
 
 ```typescript
 const emblaOptions: EmblaOptionsType = {
-  loop: true,              // Enable wrap-around (FR-005)
-  duration: 30,            // Animation speed (Embla units, ~400ms real-time)
-  skipSnaps: false,        // Smooth scroll to each slide
-  align: 'center',         // Center-align slides in viewport
-  draggable: true,         // Enable touch/mouse dragging (FR-008)
-  dragFree: false,         // Snap to slides (not free-scroll)
-  containScroll: 'trimSnaps',  // Clean edge behavior
-  slidesToScroll: 1,       // Navigate one slide at a time
-}
+  loop: true, // Enable wrap-around (FR-005)
+  duration: 30, // Animation speed (Embla units, ~400ms real-time)
+  skipSnaps: false, // Smooth scroll to each slide
+  align: "center", // Center-align slides in viewport
+  draggable: true, // Enable touch/mouse dragging (FR-008)
+  dragFree: false, // Snap to slides (not free-scroll)
+  containScroll: "trimSnaps", // Clean edge behavior
+  slidesToScroll: 1, // Navigate one slide at a time
+};
 ```
 
 ### CSS Transitions
@@ -374,13 +375,13 @@ Embla handles slide transitions internally. Additional transitions for UI elemen
 
 ```typescript
 // Hide navigation when only 1 card
-const showNavigation = cards.length > 1
+const showNavigation = cards.length > 1;
 
 // Disable loop when only 1 card
 const emblaOptions = {
   loop: cards.length > 1,
   // ... other options
-}
+};
 ```
 
 ### Rapid Clicking Protection
@@ -437,58 +438,58 @@ src/
 // Example hardcoded data in SubscriptionCarousel.tsx
 const subscriptionCards: SubscriptionCard[] = [
   {
-    id: 'basic',
-    title: 'Basic Plan',
-    description: 'Perfect for individuals',
-    characterImage: '/clips-images/character-basic.png',
-    characterImageAlt: 'Basic plan character illustration',
+    id: "basic",
+    title: "Basic Plan",
+    description: "Perfect for individuals",
+    characterImage: "/clips-images/character-basic.png",
+    characterImageAlt: "Basic plan character illustration",
     features: [
-      'Access to core features',
-      'Email support',
-      '5 GB storage',
-      'Basic analytics',
+      "Access to core features",
+      "Email support",
+      "5 GB storage",
+      "Basic analytics",
     ],
     monthlyPrice: 9.99,
-    yearlyPrice: 99.00,
-    ctaText: 'Start Free Trial',
+    yearlyPrice: 99.0,
+    ctaText: "Start Free Trial",
   },
   {
-    id: 'premium',
-    title: 'Premium Plan',
-    description: 'Most Popular',
-    characterImage: '/clips-images/character-premium.png',
-    characterImageAlt: 'Premium plan character illustration',
+    id: "premium",
+    title: "Premium Plan",
+    description: "Most Popular",
+    characterImage: "/clips-images/character-premium.png",
+    characterImageAlt: "Premium plan character illustration",
     features: [
-      'All Basic features',
-      'Priority support',
-      '50 GB storage',
-      'Advanced analytics',
-      'Custom integrations',
+      "All Basic features",
+      "Priority support",
+      "50 GB storage",
+      "Advanced analytics",
+      "Custom integrations",
     ],
     monthlyPrice: 19.99,
-    yearlyPrice: 199.00,
-    ctaText: 'Get Started',
-    badge: '50% OFF',
+    yearlyPrice: 199.0,
+    ctaText: "Get Started",
+    badge: "50% OFF",
   },
   {
-    id: 'enterprise',
-    title: 'Enterprise Plan',
-    description: 'For large teams',
-    characterImage: '/clips-images/character-enterprise.png',
-    characterImageAlt: 'Enterprise plan character illustration',
+    id: "enterprise",
+    title: "Enterprise Plan",
+    description: "For large teams",
+    characterImage: "/clips-images/character-enterprise.png",
+    characterImageAlt: "Enterprise plan character illustration",
     features: [
-      'All Premium features',
-      '24/7 phone support',
-      'Unlimited storage',
-      'Custom analytics',
-      'Dedicated account manager',
-      'SLA guarantee',
+      "All Premium features",
+      "24/7 phone support",
+      "Unlimited storage",
+      "Custom analytics",
+      "Dedicated account manager",
+      "SLA guarantee",
     ],
     monthlyPrice: 49.99,
-    yearlyPrice: 499.00,
-    ctaText: 'Contact Sales',
+    yearlyPrice: 499.0,
+    ctaText: "Contact Sales",
   },
-]
+];
 ```
 
 ---

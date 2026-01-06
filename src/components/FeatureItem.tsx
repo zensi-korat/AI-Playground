@@ -1,7 +1,7 @@
-import { Check } from "lucide-react"
+import { Check } from "lucide-react";
 
 export interface FeatureItemProps {
-  text: string
+  text: string;
 }
 
 export function FeatureItem({ text }: FeatureItemProps) {
@@ -10,5 +10,5 @@ export function FeatureItem({ text }: FeatureItemProps) {
       <Check className="h-4 w-4 shrink-0 text-black" />
       <span>{text}</span>
     </li>
-  )
+  );
 }

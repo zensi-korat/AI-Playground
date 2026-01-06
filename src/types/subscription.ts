@@ -1,68 +1,68 @@
-import type { UseEmblaCarouselType } from 'embla-carousel-react'
+import type { UseEmblaCarouselType } from "embla-carousel-react";
 
-type EmblaCarouselType = UseEmblaCarouselType[1]
+type EmblaCarouselType = UseEmblaCarouselType[1];
 
 /**
  * Represents a single subscription plan card with all display information
  */
 export interface SubscriptionCard {
   /** Unique identifier for the subscription plan (e.g., "basic", "premium", "enterprise") */
-  id: string
+  id: string;
 
   /** Display title of the subscription plan */
-  title: string
+  title: string;
 
   /** Optional description or tagline (e.g., "Most Popular", "Best Value") */
-  description?: string
+  description?: string;
 
   /** Path to character image in /public/clips-images/ */
-  characterImage: string
+  characterImage: string;
 
   /** Alt text for character image (accessibility) */
-  characterImageAlt: string
+  characterImageAlt: string;
 
   /** Array of feature descriptions shown in the card */
-  features: string[]
+  features: string[];
 
   /** Monthly price in USD */
-  monthlyPrice: number
+  monthlyPrice: number;
 
   /** Yearly price in USD (for annual billing) */
-  yearlyPrice: number
+  yearlyPrice: number;
 
   /** Call-to-action button text (e.g., "Start Free Trial", "Get Started") */
-  ctaText: string
+  ctaText: string;
 
   /** Optional badge text (e.g., "50% OFF", "NEW") */
-  badge?: string
+  badge?: string;
 }
 
 /**
  * Billing cycle options for subscription pricing
  */
-export type BillingCycle = 'month' | 'year'
+export type BillingCycle = "month" | "year";
 
 /**
  * Props for the main SubscriptionCarousel component
  */
 export interface SubscriptionCarouselProps {
   /** Array of subscription cards to display in carousel */
-  cards?: SubscriptionCard[]
+  cards?: SubscriptionCard[];
 
   /** Initial billing cycle (default: 'month') */
-  initialBillingCycle?: BillingCycle
+  initialBillingCycle?: BillingCycle;
 
   /** Callback when user clicks CTA button */
-  onCtaClick?: (cardId: string, billingCycle: BillingCycle) => void
+  onCtaClick?: (cardId: string, billingCycle: BillingCycle) => void;
 
   /** Whether to show dot indicators (default: true) */
-  showDots?: boolean
+  showDots?: boolean;
 
   /** Whether to enable touch/swipe gestures (default: true) */
-  enableSwipe?: boolean
+  enableSwipe?: boolean;
 
   /** Whether to enable keyboard navigation (default: true) */
-  enableKeyboard?: boolean
+  enableKeyboard?: boolean;
 }
 
 /**
@@ -70,13 +70,13 @@ export interface SubscriptionCarouselProps {
  */
 export interface CarouselNavigationProps {
   /** Embla API instance for programmatic control */
-  emblaApi: EmblaCarouselType | undefined
+  emblaApi: EmblaCarouselType | undefined;
 
   /** Whether previous button should be visible (default: true) */
-  showPrevButton?: boolean
+  showPrevButton?: boolean;
 
   /** Whether next button should be visible (default: true) */
-  showNextButton?: boolean
+  showNextButton?: boolean;
 }
 
 /**
@@ -84,8 +84,8 @@ export interface CarouselNavigationProps {
  */
 export interface CarouselDotsProps {
   /** Embla API instance for programmatic control */
-  emblaApi: EmblaCarouselType | undefined
+  emblaApi: EmblaCarouselType | undefined;
 
   /** Total number of slides */
-  slideCount: number
+  slideCount: number;
 }

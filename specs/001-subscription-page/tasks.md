@@ -33,9 +33,9 @@ This document provides a detailed, step-by-step task breakdown for implementing 
 
 ### Verify Project Dependencies
 
-- [X] T001 Verify Node.js and npm versions (Node 18+, npm 9+)
-- [X] T002 [P] Verify React 19.2.0 and Tailwind CSS 4.1.18 installed in package.json
-- [X] T003 [P] Verify shadcn/ui Button and Card components exist at src/components/ui/button.tsx and src/components/ui/card.tsx
+- [x] T001 Verify Node.js and npm versions (Node 18+, npm 9+)
+- [x] T002 [P] Verify React 19.2.0 and Tailwind CSS 4.1.18 installed in package.json
+- [x] T003 [P] Verify shadcn/ui Button and Card components exist at src/components/ui/button.tsx and src/components/ui/card.tsx
 
 **Duration**: 15 minutes  
 **Success Criteria**:
@@ -50,8 +50,8 @@ This document provides a detailed, step-by-step task breakdown for implementing 
 
 ### Configure Tailwind Theme Colors
 
-- [X] T004 [P] Update tailwind.config.ts to extend theme with brand colors (#0066FF, #0052CC, #000000 borders, gray accents)
-- [X] T005 [P] Add @theme directives to src/index.css for brand color CSS variables (--color-brand-primary, --color-brand-hover, --color-text-default, etc.)
+- [x] T004 [P] Update tailwind.config.ts to extend theme with brand colors (#0066FF, #0052CC, #000000 borders, gray accents)
+- [x] T005 [P] Add @theme directives to src/index.css for brand color CSS variables (--color-brand-primary, --color-brand-hover, --color-text-default, etc.)
 
 **Dependencies**: Phase 1 (all tasks)  
 **Duration**: 10 minutes  
@@ -80,9 +80,9 @@ This document provides a detailed, step-by-step task breakdown for implementing 
 
 ### Create FeatureItem Subcomponent
 
-- [X] T006 Create src/components/FeatureItem.tsx with FeatureItemProps interface (text: string)
-- [X] T007 [P] Implement FeatureItem render: `<li>` with Lucide Check icon (4x4px, black) and text span
-- [X] T008 [P] Style FeatureItem with Tailwind: flex items-start gap-3 text-sm text-gray-800 (semantic HTML, no role needed)
+- [x] T006 Create src/components/FeatureItem.tsx with FeatureItemProps interface (text: string)
+- [x] T007 [P] Implement FeatureItem render: `<li>` with Lucide Check icon (4x4px, black) and text span
+- [x] T008 [P] Style FeatureItem with Tailwind: flex items-start gap-3 text-sm text-gray-800 (semantic HTML, no role needed)
 
 **Dependencies**: Phase 2 (all tasks)  
 **Parallelizable**: T007 and T008 can run in parallel  
@@ -97,9 +97,9 @@ This document provides a detailed, step-by-step task breakdown for implementing 
 
 ### Create SubscriptionPage Container & Layout
 
-- [X] T009 Create src/pages/SubscriptionPage.tsx as default export JSX.Element
-- [X] T010 [P] Implement main flex container: flex justify-center items-center min-h-screen bg-white
-- [X] T011 [P] Add responsive max-width Card using shadcn Card: max-w-md on desktop, full-width on mobile
+- [x] T009 Create src/pages/SubscriptionPage.tsx as default export JSX.Element
+- [x] T010 [P] Implement main flex container: flex justify-center items-center min-h-screen bg-white
+- [x] T011 [P] Add responsive max-width Card using shadcn Card: max-w-md on desktop, full-width on mobile
 
 **Dependencies**: T005 (Tailwind config)  
 **Parallelizable**: T010 and T011 can run in parallel  
@@ -114,9 +114,9 @@ This document provides a detailed, step-by-step task breakdown for implementing 
 
 ### Implement Features List
 
-- [X] T012 [P] [US1] Create features data array in SubscriptionPage.tsx with 6 feature texts
-- [X] T013 [P] [US1] Render features list: `<ul>` with space-y-3 gap, map over array calling FeatureItem for each
-- [X] T014 [P] [US1] Style features section: CardContent with space-y-6, ul with proper list styling
+- [x] T012 [P] [US1] Create features data array in SubscriptionPage.tsx with 6 feature texts
+- [x] T013 [P] [US1] Render features list: `<ul>` with space-y-3 gap, map over array calling FeatureItem for each
+- [x] T014 [P] [US1] Style features section: CardContent with space-y-6, ul with proper list styling
 
 **Dependencies**: T006-T011 (all components)  
 **Parallelizable**: T012, T013, T014 can run in parallel  

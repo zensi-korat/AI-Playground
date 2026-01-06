@@ -1,144 +1,146 @@
-import { useState, useEffect, useCallback } from 'react'
-import useEmblaCarousel from 'embla-carousel-react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardFooter } from '@/components/ui/card'
-import { FeatureItem } from '@/components/FeatureItem'
-import { cn } from '@/lib/utils'
+import { useState, useEffect, useCallback } from "react";
+import useEmblaCarousel from "embla-carousel-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { FeatureItem } from "@/components/FeatureItem";
+import { cn } from "@/lib/utils";
 import type {
   SubscriptionCarouselProps,
   BillingCycle,
   SubscriptionCard,
-} from '@/types/subscription'
+} from "@/types/subscription";
 
 // Hardcoded subscription cards data (T007)
 const SUBSCRIPTION_CARDS: SubscriptionCard[] = [
   {
-    id: 'basic',
-    title: 'Basic Plan',
-    description: 'Perfect for individuals',
-    characterImage: '/clips-images/avatar-1.png',
-    characterImageAlt: 'Basic plan character illustration',
+    id: "basic",
+    title: "Basic Plan",
+    description: "Perfect for individuals",
+    characterImage: "/clips-images/avatar-1.png",
+    characterImageAlt: "Basic plan character illustration",
     features: [
-      'Unlimited Text Messages',
-      'View Character Stories',
-      'Access to core features',
-      'Email support',
-      '5 GB storage',
+      "Unlimited Text Messages",
+      "View Character Stories",
+      "Access to core features",
+      "Email support",
+      "5 GB storage",
     ],
     monthlyPrice: 9.99,
     yearlyPrice: 99.0,
-    ctaText: 'Start Free Trial',
+    ctaText: "Start Free Trial",
   },
   {
-    id: 'premium',
-    title: 'Premium Plan',
-    description: 'Most Popular',
-    characterImage: '/clips-images/user-profile-1.png',
-    characterImageAlt: 'Premium plan character illustration',
+    id: "premium",
+    title: "Premium Plan",
+    description: "Most Popular",
+    characterImage: "/clips-images/user-profile-1.png",
+    characterImageAlt: "Premium plan character illustration",
     features: [
-      'Unlimited Text Messages',
-      'View Character Stories',
-      'Unlimited Audio Messages',
-      '600 Character Limit On Enhanced Memory',
-      'Enhanced Memory Context',
-      'Remove Ads',
+      "Unlimited Text Messages",
+      "View Character Stories",
+      "Unlimited Audio Messages",
+      "600 Character Limit On Enhanced Memory",
+      "Enhanced Memory Context",
+      "Remove Ads",
     ],
     monthlyPrice: 19.99,
     yearlyPrice: 199.0,
-    ctaText: 'Get Started',
-    badge: '50% OFF',
+    ctaText: "Get Started",
+    badge: "50% OFF",
   },
   {
-    id: 'enterprise',
-    title: 'Enterprise Plan',
-    description: 'For large teams',
-    characterImage: '/clips-images/show-thumb-1.png',
-    characterImageAlt: 'Enterprise plan character illustration',
+    id: "enterprise",
+    title: "Enterprise Plan",
+    description: "For large teams",
+    characterImage: "/clips-images/show-thumb-1.png",
+    characterImageAlt: "Enterprise plan character illustration",
     features: [
-      'All Premium features',
-      '24/7 phone support',
-      'Unlimited storage',
-      'Custom analytics',
-      'Dedicated account manager',
-      'SLA guarantee',
+      "All Premium features",
+      "24/7 phone support",
+      "Unlimited storage",
+      "Custom analytics",
+      "Dedicated account manager",
+      "SLA guarantee",
     ],
     monthlyPrice: 49.99,
     yearlyPrice: 499.0,
-    ctaText: 'Contact Sales',
+    ctaText: "Contact Sales",
   },
-]
+];
 
 export function SubscriptionCarousel({
   cards = SUBSCRIPTION_CARDS,
-  initialBillingCycle = 'month',
+  initialBillingCycle = "month",
   onCtaClick,
   showDots = true,
   enableSwipe = true,
   enableKeyboard = true,
 }: SubscriptionCarouselProps) {
   const [billingCycle, setBillingCycle] =
-    useState<BillingCycle>(initialBillingCycle)
-  const [selectedIndex, setSelectedIndex] = useState(0)
+    useState<BillingCycle>(initialBillingCycle);
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   // Initialize Embla Carousel with configuration (T008, T009)
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
       loop: cards.length > 1,
       duration: 30, // ~400ms transition
-      align: 'center',
+      align: "center",
       dragFree: false, // T026: Snap-to-slide behavior
-      containScroll: 'trimSnaps', // T026: Clean edge handling
+      containScroll: "trimSnaps", // T026: Clean edge handling
       slidesToScroll: 1,
     },
     enableSwipe ? [] : undefined // T025: Enable swipe via plugins array (empty = default drag plugin)
-  )
+  );
 
   // Navigation callbacks (T016, T017)
-  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi])
-  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi])
+  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
   const scrollTo = useCallback(
     (index: number) => emblaApi?.scrollTo(index),
     [emblaApi]
-  )
+  );
 
   // Track selected index for dot indicators (T020)
   useEffect(() => {
-    if (!emblaApi) return
+    if (!emblaApi) return;
 
     const onSelect = () => {
-      setSelectedIndex(emblaApi.selectedScrollSnap())
-    }
+      setSelectedIndex(emblaApi.selectedScrollSnap());
+    };
 
-    emblaApi.on('select', onSelect)
-    onSelect()
+    emblaApi.on("select", onSelect);
+    onSelect();
 
     return () => {
-      emblaApi.off('select', onSelect)
-    }
-  }, [emblaApi])
+      emblaApi.off("select", onSelect);
+    };
+  }, [emblaApi]);
 
   // Keyboard navigation (T029-T032)
   useEffect(() => {
-    if (!emblaApi || !enableKeyboard) return
+    if (!emblaApi || !enableKeyboard) return;
 
-    const container = document.querySelector('[role="region"][aria-label="Subscription plans carousel"]')
-    if (!container) return
+    const container = document.querySelector(
+      '[role="region"][aria-label="Subscription plans carousel"]'
+    );
+    if (!container) return;
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'ArrowLeft') {
-        scrollPrev()
-      } else if (event.key === 'ArrowRight') {
-        scrollNext()
+      if (event.key === "ArrowLeft") {
+        scrollPrev();
+      } else if (event.key === "ArrowRight") {
+        scrollNext();
       }
-    }
+    };
 
-    container.addEventListener('keydown', handleKeyDown as EventListener)
+    container.addEventListener("keydown", handleKeyDown as EventListener);
 
     return () => {
-      container.removeEventListener('keydown', handleKeyDown as EventListener)
-    }
-  }, [emblaApi, enableKeyboard, scrollPrev, scrollNext])
+      container.removeEventListener("keydown", handleKeyDown as EventListener);
+    };
+  }, [emblaApi, enableKeyboard, scrollPrev, scrollNext]);
 
   // Handle empty cards array (T040 edge case)
   if (cards.length === 0) {
@@ -146,10 +148,10 @@ export function SubscriptionCarousel({
       <div className="flex items-center justify-center min-h-100 text-gray-500">
         No subscription plans available
       </div>
-    )
+    );
   }
 
-  const showNavigation = cards.length > 1
+  const showNavigation = cards.length > 1;
 
   return (
     <div className="flex min-h-screen w-full bg-white text-black overflow-auto">
@@ -200,12 +202,12 @@ export function SubscriptionCarousel({
                       {/* Pricing Toggle (T012, T013) */}
                       <div className="grid grid-cols-2 gap-3">
                         <button
-                          onClick={() => setBillingCycle('month')}
+                          onClick={() => setBillingCycle("month")}
                           className={cn(
-                            'rounded-lg py-4 px-3 text-center transition-all border-2',
-                            billingCycle === 'month'
-                              ? 'border-black bg-white'
-                              : 'border-gray-300 bg-white hover:border-gray-400'
+                            "rounded-lg py-4 px-3 text-center transition-all border-2",
+                            billingCycle === "month"
+                              ? "border-black bg-white"
+                              : "border-gray-300 bg-white hover:border-gray-400"
                           )}
                         >
                           <div className="text-xs text-gray-600 mb-1">
@@ -216,12 +218,12 @@ export function SubscriptionCarousel({
                           </div>
                         </button>
                         <button
-                          onClick={() => setBillingCycle('year')}
+                          onClick={() => setBillingCycle("year")}
                           className={cn(
-                            'rounded-lg py-4 px-3 text-center transition-all border-2',
-                            billingCycle === 'year'
-                              ? 'border-black bg-white'
-                              : 'border-gray-300 bg-white hover:border-gray-400'
+                            "rounded-lg py-4 px-3 text-center transition-all border-2",
+                            billingCycle === "year"
+                              ? "border-black bg-white"
+                              : "border-gray-300 bg-white hover:border-gray-400"
                           )}
                         >
                           <div className="text-xs text-gray-600 mb-1">
@@ -258,16 +260,16 @@ export function SubscriptionCarousel({
                       <Button
                         className="w-full text-white rounded-lg h-12 text-base font-semibold"
                         style={{
-                          backgroundColor: 'var(--fg-brand-primary)',
+                          backgroundColor: "var(--fg-brand-primary)",
                         }}
                         onClick={() => onCtaClick?.(card.id, billingCycle)}
                         onMouseEnter={(e) =>
                           (e.currentTarget.style.backgroundColor =
-                            'var(--fg-brand-primary-hover, #2a85e0)')
+                            "var(--fg-brand-primary-hover, #2a85e0)")
                         }
                         onMouseLeave={(e) =>
                           (e.currentTarget.style.backgroundColor =
-                            'var(--fg-brand-primary)')
+                            "var(--fg-brand-primary)")
                         }
                       >
                         {card.ctaText} →
@@ -326,13 +328,13 @@ export function SubscriptionCarousel({
                   key={index}
                   onClick={() => scrollTo(index)} // T023: Click-to-navigate
                   className={cn(
-                    'w-2 h-2 rounded-full transition-colors duration-300', // T022: Styling
+                    "w-2 h-2 rounded-full transition-colors duration-300", // T022: Styling
                     index === selectedIndex
-                      ? 'bg-black'
-                      : 'bg-gray-300 hover:bg-gray-400'
+                      ? "bg-black"
+                      : "bg-gray-300 hover:bg-gray-400"
                   )}
                   aria-label={`Go to subscription plan ${index + 1}`} // T024: Accessibility
-                  aria-current={index === selectedIndex ? 'true' : 'false'} // T024: Accessibility
+                  aria-current={index === selectedIndex ? "true" : "false"} // T024: Accessibility
                 />
               ))}
             </div>
@@ -340,5 +342,5 @@ export function SubscriptionCarousel({
         </div>
       </main>
     </div>
-  )
+  );
 }

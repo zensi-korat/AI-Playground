@@ -18,6 +18,7 @@ Implementation tasks successfully generated for card carousel slider feature. Al
 **File**: [tasks.md](tasks.md) (524 lines)
 
 **Content**:
+
 - 42 implementation tasks (T001-T042)
 - 30 manual verification checks (V001-V030)
 - 7 phases (Setup → Foundational → US1 → US2 → US3 → US4 → Polish)
@@ -27,26 +28,28 @@ Implementation tasks successfully generated for card carousel slider feature. Al
 
 ### Task Distribution
 
-| Phase | Purpose | Tasks | Story | Priority |
-|-------|---------|-------|-------|----------|
-| **Phase 1** | Setup | 4 tasks (T001-T004) | N/A | Prerequisites |
-| **Phase 2** | Foundational | 3 tasks (T005-T007) | N/A | Blocking all stories |
-| **Phase 3** | Navigate Between Cards | 12 tasks (T008-T019) | US1 | P1 (MVP) |
-| **Phase 4** | Visual Indicators | 5 tasks (T020-T024) | US2 | P2 |
-| **Phase 5** | Touch/Swipe Gestures | 4 tasks (T025-T028) | US3 | P3 |
-| **Phase 6** | Keyboard Navigation | 4 tasks (T029-T032) | US4 | P3 |
-| **Phase 7** | Polish & Verification | 10 tasks (T033-T042) | N/A | Cross-cutting |
+| Phase       | Purpose                | Tasks                | Story | Priority             |
+| ----------- | ---------------------- | -------------------- | ----- | -------------------- |
+| **Phase 1** | Setup                  | 4 tasks (T001-T004)  | N/A   | Prerequisites        |
+| **Phase 2** | Foundational           | 3 tasks (T005-T007)  | N/A   | Blocking all stories |
+| **Phase 3** | Navigate Between Cards | 12 tasks (T008-T019) | US1   | P1 (MVP)             |
+| **Phase 4** | Visual Indicators      | 5 tasks (T020-T024)  | US2   | P2                   |
+| **Phase 5** | Touch/Swipe Gestures   | 4 tasks (T025-T028)  | US3   | P3                   |
+| **Phase 6** | Keyboard Navigation    | 4 tasks (T029-T032)  | US4   | P3                   |
+| **Phase 7** | Polish & Verification  | 10 tasks (T033-T042) | N/A   | Cross-cutting        |
 
 **Total**: 42 tasks across 7 phases
 
 ### MVP Scope
 
 **MVP = Phase 1 + 2 + 3** (19 tasks):
+
 - T001-T004: Setup (prerequisites, dependencies)
 - T005-T007: Foundational (types, images, hardcoded data)
 - T008-T019: User Story 1 (core carousel with button navigation)
 
 **MVP Deliverables**:
+
 - Working carousel with Next/Previous buttons
 - Smooth slide animations with wrap-around
 - Billing cycle persistence across cards
@@ -58,6 +61,7 @@ Implementation tasks successfully generated for card carousel slider feature. Al
 ### Full Feature Scope
 
 **Full = All Phases** (42 tasks):
+
 - MVP (19 tasks)
 - Phase 4: Dot indicators (5 tasks)
 - Phase 5: Touch/swipe gestures (4 tasks)
@@ -65,6 +69,7 @@ Implementation tasks successfully generated for card carousel slider feature. Al
 - Phase 7: Polish & verification (10 tasks)
 
 **Full Feature Deliverables**:
+
 - All MVP features
 - Dot indicators with click-to-navigate
 - Touch/swipe gestures for mobile
@@ -82,11 +87,13 @@ Implementation tasks successfully generated for card carousel slider feature. Al
 ### Checklist Format (✅ ALL TASKS COMPLIANT)
 
 Every task follows the required format:
+
 ```
 - [ ] [TaskID] [P?] [Story?] Description with file path
 ```
 
 **Format Components**:
+
 1. ✅ **Checkbox**: All tasks start with `- [ ]`
 2. ✅ **Task ID**: Sequential T001-T042
 3. ✅ **[P] marker**: 8 tasks marked parallelizable (T005, T006, T012-T015, T033-T035)
@@ -96,21 +103,27 @@ Every task follows the required format:
 ### Organization by User Story (✅ COMPLIANT)
 
 **Phase 2: Foundational** (NO story labels - blocking prerequisites):
+
 - T005-T007: Types, images, hardcoded data
 
 **Phase 3: User Story 1 [US1]** (P1 - Navigate Between Cards):
+
 - T008-T019: Core carousel with button navigation
 
 **Phase 4: User Story 2 [US2]** (P2 - Visual Indicators):
+
 - T020-T024: Dot indicators
 
 **Phase 5: User Story 3 [US3]** (P3 - Touch/Swipe):
+
 - T025-T028: Swipe gestures
 
 **Phase 6: User Story 4 [US4]** (P3 - Keyboard):
+
 - T029-T032: Arrow key navigation
 
 **Phase 7: Polish** (NO story labels - cross-cutting concerns):
+
 - T033-T042: Responsive verification, performance, edge cases
 
 ---
@@ -151,11 +164,13 @@ Each user story can be manually verified independently:
 ### Within Same Phase (8 Parallelizable Tasks)
 
 **Phase 2 - Foundational**:
+
 - T005 [P]: Create TypeScript types
 - T006 [P]: Add character images
 - (Can run in parallel, different files)
 
 **Phase 3 - User Story 1**:
+
 - T012 [P] [US1]: Pricing toggle
 - T013 [P] [US1]: Price display logic
 - T014 [P] [US1]: Features list
@@ -163,6 +178,7 @@ Each user story can be manually verified independently:
 - (Can run in parallel after T011 complete, different UI elements)
 
 **Phase 7 - Polish**:
+
 - T033: Test 375px mobile
 - T034: Test 768px tablet
 - T035: Test 1440px desktop
@@ -171,11 +187,13 @@ Each user story can be manually verified independently:
 ### Across Phases (After Dependencies Met)
 
 After **T011 (SubscriptionCarousel component exists)**:
+
 - US2 (T020-T024) can start → Add dot indicators
 - US3 (T025-T028) can start → Enable swipe gestures
 - US4 (T029-T032) can start → Add keyboard navigation
 
 **Example Multi-Developer Workflow**:
+
 ```text
 Developer A: T008-T019 (US1 - Core carousel) [4 hours]
 Developer B: Wait for T011, then T020-T024 (US2 - Dots) [1 hour]
@@ -192,6 +210,7 @@ Total Time: ~5 hours (vs 8 hours sequential)
 ### Functional Verification (20 checks)
 
 **User Story 1 (V001-V006)**:
+
 - V001: Next button navigation
 - V002: Previous button navigation
 - V003: Wrap-around (last→first)
@@ -200,12 +219,14 @@ Total Time: ~5 hours (vs 8 hours sequential)
 - V006: Billing cycle persistence
 
 **User Story 2 (V007-V010)**:
+
 - V007: Active dot on card 1
 - V008: Dot updates on navigation
 - V009: Click dot to navigate
 - V010: Dot count matches cards
 
 **User Story 3 (V011-V015)**:
+
 - V011: Swipe left on mobile
 - V012: Swipe right on mobile
 - V013: Short swipe snap back
@@ -213,6 +234,7 @@ Total Time: ~5 hours (vs 8 hours sequential)
 - V015: No scroll interference
 
 **User Story 4 (V016-V020)**:
+
 - V016: Tab to focus carousel
 - V017: Right arrow navigation
 - V018: Left arrow navigation
@@ -222,17 +244,20 @@ Total Time: ~5 hours (vs 8 hours sequential)
 ### Polish Verification (10 checks)
 
 **Responsive (V021-V023)**:
+
 - V021: Window resize stability
 - V022: Empty cards message
 - V023: Consistent card heights
 
 **UI/UX (V024-V027)**:
+
 - V024: Button hover states
 - V025: Dot hover states
 - V026: Touch target 44x44px
 - V027: Security badge/footer
 
 **Code Quality (V028-V030)**:
+
 - V028: No console errors
 - V029: TypeScript clean
 - V030: ESLint passes
@@ -246,6 +271,7 @@ Total Time: ~5 hours (vs 8 hours sequential)
 ### Code Review Checklist (Embedded in tasks.md)
 
 **Clean Code (Principle I)** - 6 checks:
+
 - [ ] Descriptive component names
 - [ ] Small, single-responsibility functions
 - [ ] No code duplication
@@ -254,6 +280,7 @@ Total Time: ~5 hours (vs 8 hours sequential)
 - [ ] Comments explain "why" not "what"
 
 **Simple UX (Principle II)** - 5 checks:
+
 - [ ] 1-click navigation
 - [ ] Familiar carousel pattern
 - [ ] Immediate visual feedback
@@ -261,6 +288,7 @@ Total Time: ~5 hours (vs 8 hours sequential)
 - [ ] No unnecessary features
 
 **Responsive Design (Principle III)** - 5 checks:
+
 - [ ] Mobile-first Tailwind classes
 - [ ] Tested at 375px, 768px, 1440px
 - [ ] Touch targets ≥ 44x44px
@@ -268,6 +296,7 @@ Total Time: ~5 hours (vs 8 hours sequential)
 - [ ] Images scale appropriately
 
 **Minimal Dependencies (Principle IV)** - 5 checks:
+
 - [ ] Only 1 new dependency (Embla 13KB)
 - [ ] Embla actively maintained
 - [ ] No heavy animation libraries
@@ -275,6 +304,7 @@ Total Time: ~5 hours (vs 8 hours sequential)
 - [ ] Reused existing components
 
 **Zero Testing (Principle V)** - 5 checks:
+
 - [ ] No test files created
 - [ ] No testing libraries installed
 - [ ] Manual verification checklists
@@ -290,35 +320,42 @@ Total Time: ~5 hours (vs 8 hours sequential)
 ### 6 Structured Commits
 
 **Commit 1**: Foundation (T005-T006)
+
 - TypeScript types
 - Character images
 
 **Commit 2**: Core Carousel US1 (T007-T019)
+
 - SubscriptionCarousel component
 - Button navigation
 - Billing cycle state
 - Update SubscriptionPage
 
 **Commit 3**: Dot Indicators US2 (T020-T024)
+
 - selectedIndex tracking
 - Dot rendering
 - Click-to-navigate
 
 **Commit 4**: Touch Gestures US3 (T025-T028)
+
 - Enable draggable:true
 - Snap-to-slide behavior
 
 **Commit 5**: Keyboard Navigation US4 (T029-T032)
+
 - tabIndex and ARIA
 - Keydown listener
 - Arrow key handlers
 
 **Commit 6**: Polish & Verification (T033-T042)
+
 - Responsive testing
 - Performance audit
 - Edge case handling
 
 Each commit includes:
+
 - Clear feature description
 - Tasks completed (T###)
 - Verification checks passed (V###)
@@ -378,6 +415,7 @@ Each commit includes:
 ### Ready for Implementation
 
 **What's Ready**:
+
 - 42 actionable tasks with exact file paths
 - 30 manual verification checks
 - 6 commit templates
@@ -386,6 +424,7 @@ Each commit includes:
 - Estimated time: 4-6 hours
 
 **What's Next**:
+
 1. Run `/speckit.implement` to execute tasks
 2. Follow task order (T001→T042)
 3. Complete manual verification (V001-V030)
@@ -403,20 +442,20 @@ Each commit includes:
 **Commit Templates**: 6 structured commits  
 **Constitutional Checks**: 26 compliance items  
 **Requirements Coverage**: 14/14 (100%)  
-**Success Criteria Coverage**: 10/10 (100%)  
+**Success Criteria Coverage**: 10/10 (100%)
 
 ---
 
 ## Quality Score
 
-| Category | Score | Notes |
-|----------|-------|-------|
-| Task Organization | 10/10 | Organized by user story, clear dependencies |
-| Format Compliance | 10/10 | All tasks follow checklist format with IDs, paths |
-| Requirements Coverage | 10/10 | All 14 FRs mapped to tasks |
-| Success Criteria Coverage | 10/10 | All 10 SCs mapped to verification |
-| Constitutional Alignment | 10/10 | Zero testing, manual verification checklists |
-| Implementation Readiness | 10/10 | Exact file paths, commit templates, time estimates |
+| Category                  | Score | Notes                                              |
+| ------------------------- | ----- | -------------------------------------------------- |
+| Task Organization         | 10/10 | Organized by user story, clear dependencies        |
+| Format Compliance         | 10/10 | All tasks follow checklist format with IDs, paths  |
+| Requirements Coverage     | 10/10 | All 14 FRs mapped to tasks                         |
+| Success Criteria Coverage | 10/10 | All 10 SCs mapped to verification                  |
+| Constitutional Alignment  | 10/10 | Zero testing, manual verification checklists       |
+| Implementation Readiness  | 10/10 | Exact file paths, commit templates, time estimates |
 
 **Total Score**: 60/60 (100%) - ✅ TASK BREAKDOWN COMPLETE
 

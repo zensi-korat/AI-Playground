@@ -25,13 +25,13 @@ Create a card carousel slider that allows users to navigate between multiple sub
 
 _GATE: Must pass before Phase 0 research. Re-check after Phase 1 design._
 
-| Principle                  | Status | Assessment                                                                                                   |
-| -------------------------- | ------ | ------------------------------------------------------------------------------------------------------------ |
-| I. Clean Code              | ✅ PASS | Carousel logic can be cleanly abstracted with single-responsibility hooks/components. Embla provides clean API. |
-| II. Simple UX              | ✅ PASS | Natural button navigation + familiar carousel pattern. 1-2 clicks to navigate cards. Minimal cognitive load.  |
-| III. Responsive Design     | ✅ PASS | Embla natively supports responsive breakpoints. Touch targets meet 44x44px minimum. Mobile-first approach.    |
-| IV. Minimal Dependencies   | ✅ PASS | Embla Carousel (~13KB gzipped) is actively maintained, focused library. No heavy animation frameworks.        |
-| V. Zero Testing            | ✅ PASS | Manual verification at 3 breakpoints. No test files. Verification checklist for visual QA only.               |
+| Principle                | Status  | Assessment                                                                                                      |
+| ------------------------ | ------- | --------------------------------------------------------------------------------------------------------------- |
+| I. Clean Code            | ✅ PASS | Carousel logic can be cleanly abstracted with single-responsibility hooks/components. Embla provides clean API. |
+| II. Simple UX            | ✅ PASS | Natural button navigation + familiar carousel pattern. 1-2 clicks to navigate cards. Minimal cognitive load.    |
+| III. Responsive Design   | ✅ PASS | Embla natively supports responsive breakpoints. Touch targets meet 44x44px minimum. Mobile-first approach.      |
+| IV. Minimal Dependencies | ✅ PASS | Embla Carousel (~13KB gzipped) is actively maintained, focused library. No heavy animation frameworks.          |
+| V. Zero Testing          | ✅ PASS | Manual verification at 3 breakpoints. No test files. Verification checklist for visual QA only.                 |
 
 **GATE STATUS: ✅ ALL CHECKS PASSED - Proceed to Phase 0 Research**
 
@@ -79,6 +79,7 @@ public/
 **Goal**: Resolve all technical unknowns and establish implementation patterns
 
 **Research Tasks**:
+
 1. Evaluate carousel libraries (Embla vs alternatives)
 2. Define animation strategy (CSS transforms vs library)
 3. Determine touch gesture implementation approach
@@ -93,6 +94,7 @@ public/
 **Goal**: Define component architecture and data models before implementation
 
 **Tasks**:
+
 1. Create `data-model.md` with TypeScript interfaces
 2. Generate `contracts/SubscriptionCarousel.md` component API
 3. Generate `quickstart.md` setup guide
